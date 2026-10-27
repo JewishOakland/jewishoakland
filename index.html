@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chabad Jewish Center of Oakland</title>
+<meta name="description" content="Chabad Oakland is an innovative, inclusive, Jewish outreach organization dedicated to fostering a vibrant and engaged community in Oakland.">
+<link rel="icon" href="https://www.jewishoakland.org/wp-content/uploads/2019/01/cropped-logo-sm-2-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #14306b;
+    --navy-deep: #0d1f47;
+    --gold: #e0a526;
+    --gold-soft: #fbf1db;
+    --cream: #faf7f1;
+    --ink: #1d2433;
+    --muted: #5b6375;
+    --line: #e4dfd4;
+    --white: #ffffff;
+    --radius: 14px;
+    --wrap: 1180px;
+    --serif: "Fraunces", Georgia, serif;
+    --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--sans); font-size: 18px; line-height: 1.6; color: var(--ink); background: var(--white); }
+  img { max-width: 100%; display: block; }
+  a { color: var(--navy); }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; margin: 0 0 .5em; color: var(--navy-deep); }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); }
+  h3 { font-size: 1.3rem; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+  .eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #a8730a; margin: 0 0 .6em; }
+  .lede { font-size: 1.15rem; color: var(--muted); max-width: 46ch; }
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 16px; top: 16px; z-index: 100; background: var(--white); padding: 8px 14px; border-radius: 8px; }
+
+  .btn { display: inline-flex; align-items: center; gap: .5em; padding: .8em 1.4em; border-radius: 999px; font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid transparent; transition: transform .15s ease, background .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-gold { background: var(--gold); color: var(--navy-deep); }
+  .btn-gold:hover { background: #f0b73a; }
+  .btn-ghost { border-color: rgba(255,255,255,.8); color: var(--white); }
+  .btn-ghost:hover { background: rgba(255,255,255,.12); }
+  .btn-navy { background: var(--navy); color: var(--white); }
+  .btn-navy:hover { background: var(--navy-deep); }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+  /* Top bar */
+  .topbar { background: var(--navy-deep); color: #d6dcec; font-size: .9rem; }
+  .topbar .wrap { display: flex; justify-content: space-between; gap: 16px; padding-top: 8px; padding-bottom: 8px; flex-wrap: wrap; }
+  .topbar a { color: #fff; text-decoration: none; }
+  .topbar a:hover { text-decoration: underline; }
+  .topbar .links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+  /* Header */
+  header.site { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 78px; }
+  .logo img { height: 56px; width: auto; }
+  nav.main ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; align-items: center; }
+  nav.main a { display: block; padding: 8px 12px; border-radius: 8px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: .98rem; }
+  nav.main a:hover { background: var(--cream); color: var(--navy); }
+  nav.main .btn { margin-left: 8px; padding: .6em 1.2em; }
+  .menu-toggle { display: none; background: none; border: 2px solid var(--line); border-radius: 10px; padding: 8px 12px; font: inherit; font-weight: 700; color: var(--navy); cursor: pointer; }
+
+  /* Hero */
+  .hero { position: relative; color: var(--white); background: var(--navy-deep) url("https://www.jewishoakland.org/wp-content/uploads/2019/01/cover4.jpg") right center / cover no-repeat; }
+  .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(13,31,71,.94) 0%, rgba(13,31,71,.78) 45%, rgba(13,31,71,.25) 100%); }
+  .hero .wrap { position: relative; padding-top: clamp(64px, 10vw, 120px); padding-bottom: clamp(64px, 10vw, 120px); }
+  .hero h1 { color: var(--white); font-size: clamp(2.4rem, 6vw, 4.2rem); max-width: 14ch; }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero p { font-size: clamp(1.1rem, 2vw, 1.3rem); max-width: 40ch; color: #e7ebf5; margin: 0 0 1.8em; }
+  .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Info strip */
+  .strip { background: var(--cream); border-bottom: 1px solid var(--line); }
+  .strip .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .strip .cell { padding: 22px 24px; border-right: 1px solid var(--line); }
+  .strip .cell:last-child { border-right: 0; }
+  .strip .label { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .strip .value { font-family: var(--serif); font-size: 1.25rem; color: var(--navy-deep); margin: 2px 0; }
+  .strip .note { font-size: .92rem; color: var(--muted); }
+  .strip .note a { font-weight: 600; }
+
+  section.block { padding: clamp(56px, 8vw, 96px) 0; }
+  .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
+  .section-head p { margin: 0; }
+  .text-link { font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .text-link:hover { text-decoration: underline; }
+
+  /* Chanukah */
+  .chanukah { padding-bottom: clamp(40px, 5vw, 64px); background: linear-gradient(180deg, var(--gold-soft), var(--white)); }
+  .banner { display: block; border-radius: var(--radius); overflow: hidden; box-shadow: 0 12px 32px rgba(13,31,71,.15); margin-bottom: 28px; }
+  .banner img { width: 100%; aspect-ratio: 8 / 3; object-fit: cover; }
+  .event-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+  .event { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: box-shadow .2s ease, transform .2s ease; }
+  .event:hover { box-shadow: 0 10px 24px rgba(13,31,71,.12); transform: translateY(-3px); }
+  .event img { aspect-ratio: 46 / 27; object-fit: cover; width: 100%; }
+  .event span { padding: 12px 14px 16px; font-weight: 700; color: var(--navy-deep); line-height: 1.3; }
+
+  /* Programs */
+  .programs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .program { position: relative; padding: 28px; border-radius: var(--radius); background: var(--cream); border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .program .icon { width: 48px; height: 48px; border-radius: 12px; background: var(--navy); color: var(--gold); display: grid; place-items: center; margin-bottom: 18px; }
+  .program .icon svg { width: 26px; height: 26px; }
+  .program p { color: var(--muted); margin: 0 0 16px; flex: 1; }
+  .program ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .program li a { display: inline-block; font-size: .9rem; font-weight: 600; text-decoration: none; padding: 4px 12px; border-radius: 999px; background: var(--white); border: 1px solid var(--line); }
+  .program li a:hover { border-color: var(--navy); }
+  .program h3 a { text-decoration: none; color: inherit; }
+  .program h3 a::after { content: " →"; color: var(--gold); }
+
+  /* Welcome */
+  .welcome { background: var(--navy-deep); color: #e7ebf5; }
+  .welcome .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  .welcome h2 { color: var(--white); }
+  .welcome .photo { border-radius: var(--radius); overflow: hidden; box-shadow: 0 20px 48px rgba(0,0,0,.35); }
+  .welcome .photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .values { list-style: none; padding: 0; margin: 24px 0 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
+  .values li { display: flex; gap: 10px; align-items: baseline; font-weight: 600; color: var(--white); }
+  .values li::before { content: ""; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); transform: translateY(-1px); }
+  .welcome .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Quick links */
+  .quick { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .quick a { display: block; text-decoration: none; color: inherit; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); background: var(--white); transition: box-shadow .2s ease; }
+  .quick a:hover { box-shadow: 0 10px 24px rgba(13,31,71,.12); }
+  .quick img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+  .quick div { padding: 14px 16px 18px; }
+  .quick strong { display: block; font-family: var(--serif); font-size: 1.15rem; color: var(--navy-deep); }
+  .quick small { color: var(--muted); font-size: .92rem; }
+
+  /* Support */
+  .support { background: var(--cream); }
+  .support .wrap { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  .give-list { display: grid; gap: 14px; }
+  .give { display: flex; gap: 16px; align-items: center; padding: 16px; border-radius: var(--radius); background: var(--white); border: 1px solid var(--line); text-decoration: none; color: inherit; }
+  .give:hover { border-color: var(--navy); }
+  .give img { width: 120px; height: 72px; object-fit: cover; border-radius: 10px; flex: none; }
+  .give strong { display: block; color: var(--navy-deep); font-size: 1.05rem; }
+  .give small { color: var(--muted); }
+
+  /* Visit */
+  .visit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .visit .card { padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); }
+  .visit .card p { margin: 0 0 6px; }
+  .visit .card a { font-weight: 600; }
+
+  footer.site { background: var(--navy-deep); color: #c3cbe0; font-size: .95rem; padding: 48px 0 32px; }
+  footer.site .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+  footer.site h4 { color: var(--white); font-family: var(--sans); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
+  footer.site ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  footer.site a { color: #e7ebf5; text-decoration: none; }
+  footer.site a:hover { text-decoration: underline; }
+  footer.site .legal { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; font-size: .85rem; }
+  .footer-logo { background: var(--white); display: inline-block; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; }
+  .footer-logo img { height: 44px; }
+
+  @media (max-width: 1060px) {
+    .event-grid { grid-template-columns: repeat(3, 1fr); }
+    .quick { grid-template-columns: repeat(2, 1fr); }
+    footer.site .wrap { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 960px) {
+    .menu-toggle { display: block; }
+    nav.main { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--line); padding: 12px 20px 20px; }
+    nav.main.open { display: block; }
+    nav.main ul { flex-direction: column; align-items: stretch; }
+    nav.main .btn { margin: 8px 0 0; justify-content: center; }
+    .programs { grid-template-columns: 1fr 1fr; }
+    .welcome .wrap, .support .wrap { grid-template-columns: 1fr; }
+    .visit { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 17px; }
+    .hero { background-position: 25% center; }
+    .hero::before { background: rgba(13,31,71,.85); }
+    .strip .wrap { grid-template-columns: 1fr; }
+    .strip .cell { border-right: 0; border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .strip .cell:last-child { border-bottom: 0; }
+    .event-grid { grid-template-columns: 1fr 1fr; }
+    .programs, .quick, .values { grid-template-columns: 1fr; }
+    .topbar .links { display: none; }
+    .give img { width: 88px; height: 60px; }
+    footer.site .wrap { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <span id="hebrew-date">Chabad Jewish Center of Oakland</span>
+    <div class="links">
+      <a href="https://www.jewishoakland.org/main/about-us/">About</a>
+      <a href="https://www.jewishoakland.org/main/newsletter/">Newsletter</a>
+      <a href="https://www.jewishoakland.org/main/ask-the-rabbi/">Ask the Rabbi</a>
+      <a href="tel:+15105456770">510.545.6770</a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="https://www.jewishoakland.org/" aria-label="Chabad Oakland home">
+      <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/cropped-logo-new-1.png" alt="Chabad Oakland">
+    </a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="main" id="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="https://www.jewishoakland.org/category/shul/">Synagogue</a></li>
+        <li><a href="https://www.jewishoakland.org/category/adulted/">Learning</a></li>
+        <li><a href="https://www.jewishoakland.org/category/yjp/">Young Professionals</a></li>
+        <li><a href="https://www.jewishoakland.org/category/women/">Women</a></li>
+        <li><a href="https://www.jewishoakland.org/category/youth/">Youth &amp; Family</a></li>
+        <li><a class="btn btn-gold" href="https://www.jewishoakland.org/main/donate/">Donate</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>Jewish life on <em>Lake Merritt</em></h1>
+      <p>An innovative, inclusive Jewish community in Oakland. Warm and welcoming, for every age, to each on their level.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#chanukah">See what's coming up</a>
+        <a class="btn btn-ghost" href="https://www.jewishoakland.org/main/what-to-expect-at-chabad/">First time? What to expect</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <div class="cell">
+        <div class="label">Shabbat candle lighting</div>
+        <div class="value" id="candles">This Friday</div>
+        <div class="note" id="candles-note"><a href="https://www.hebcal.com/shabbat?latitude=37.8107&amp;longitude=-122.2437&amp;tzid=America/Los_Angeles&amp;b=18&amp;M=on">See Oakland times</a></div>
+      </div>
+      <div class="cell">
+        <div class="label">Prayer services</div>
+        <div class="value">Shacharis · 7:30 am</div>
+        <div class="note"><a href="https://www.jewishoakland.org/shul/schedule-of-services/">Full schedule of services</a></div>
+      </div>
+      <div class="cell">
+        <div class="label">Find us</div>
+        <div class="value">3014 Lakeshore Ave</div>
+        <div class="note"><a href="https://maps.google.com/?q=3014+Lakeshore+Ave+Oakland+CA+94610">Directions</a> · <a href="https://www.jewishoakland.org/main/visitors-info/">Visitor info</a></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="block chanukah" id="chanukah">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Featured</p>
+          <h2>Chanukah 2026 in Oakland</h2>
+          <p class="lede">Events, public menorah lightings and the car menorah parade.</p>
+        </div>
+        <a class="text-link" href="https://www.jewishoakland.org/civicrm/event/ical/?reset=1&amp;list=1&amp;html=1">All upcoming events →</a>
+      </div>
+      <a class="banner" href="https://www.jewishoakland.org/holidays/chanukah/car-menorah-parade/">
+        <img src="https://www.jewishoakland.org/wp-content/uploads/2026/10/Chanukah-2026-Oakland-Parade-1536x576.png" alt="Chabad Oakland Chanukah 2026: events, lightings, parade and schedules">
+      </a>
+      <div class="event-grid">
+        <a class="event" href="https://www.jewishoakland.org/holidays/chanukah/lake/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2019/11/772abc2a-a40e-47c3-b30d-bb1b403308bf-460x270.jpg" alt="" loading="lazy">
+          <span>Grand Chanukah Celebration on Lake Merritt</span>
+        </a>
+        <a class="event" href="https://www.jewishoakland.org/holidays/chanukah/car-menorah-parade/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2020/12/Car-Parade-promo-e1701807522927-460x212.jpg" alt="" loading="lazy">
+          <span>Car Menorah Parade</span>
+        </a>
+        <a class="event" href="https://www.jewishoakland.org/holidays/chanukah/latke-wars/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2026/10/Latke-Wars-Banner-2026-460x270.png" alt="" loading="lazy">
+          <span>Latke Wars</span>
+        </a>
+        <a class="event" href="https://www.jewishoakland.org/holidays/chanukah/piedmont-chanukah-celebration/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2026/10/Piedmont-Chanukah-Banner-2026-460x270.png" alt="" loading="lazy">
+          <span>Piedmont Chanukah Celebration</span>
+        </a>
+        <a class="event" href="https://www.jewishoakland.org/holidays/chanukah/free-menorah-kit/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2020/12/Menorah-kit-460x270.jpg" alt="" loading="lazy">
+          <span>Free Menorah Kit</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="programs">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Get involved</p>
+          <h2>Find your place</h2>
+          <p class="lede">Whatever your background, there's a way in.</p>
+        </div>
+      </div>
+      <div class="programs">
+        <article class="program">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l7-6 7 6v11M10 21v-6h4v6"/></svg></div>
+          <h3><a href="https://www.jewishoakland.org/category/shul/">The Shul</a></h3>
+          <p>Prayer services, Shabbat and the holidays, and a place to say Kaddish.</p>
+          <ul>
+            <li><a href="https://www.jewishoakland.org/shul/schedule-of-services/">Services</a></li>
+            <li><a href="https://www.jewishoakland.org/shul/kaddish/">Kaddish</a></li>
+            <li><a href="https://www.jewishoakland.org/shul/kiddush-sponsorship/">Sponsor a Kiddush</a></li>
+            <li><a href="https://www.jewishoakland.org/category/holidays/high-holidays/">High Holidays</a></li>
+          </ul>
+        </article>
+        <article class="program">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg></div>
+          <h3><a href="https://www.jewishoakland.org/category/adulted/">Adult Learning</a></h3>
+          <p>Torah study in a group, over lunch, over tea, or one on one.</p>
+          <ul>
+            <li><a href="https://www.jewishoakland.org/adulted/torah-study/">Torah Study</a></li>
+            <li><a href="https://www.jewishoakland.org/adulted/lunch-learn/">Lunch &amp; Learn</a></li>
+            <li><a href="https://www.jewishoakland.org/adulted/torah-tea/">Torah &amp; Tea</a></li>
+            <li><a href="https://www.jewishoakland.org/adulted/one-on-one-study/">One on One</a></li>
+          </ul>
+        </article>
+        <article class="program">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M15 14.5a5 5 0 0 1 6.5 4.8"/></svg></div>
+          <h3><a href="https://www.jewishoakland.org/category/yjp/">Young Jewish Professionals</a></h3>
+          <p>Shabbat Unplugged and social events for young professionals.</p>
+          <ul>
+            <li><a href="https://www.jewishoakland.org/yjp/shabbat-unplugged/">Shabbat Unplugged</a></li>
+            <li><a href="https://www.jewishoakland.org/yjp/yjp-photo-gallery/">Photos</a></li>
+            <li><a href="https://www.instagram.com/yjpoakland/">Instagram</a></li>
+          </ul>
+        </article>
+        <article class="program">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c1.5 2 1.5 3.5 0 5M8 12h8M9 12v8h6v-8M6 21h12"/></svg></div>
+          <h3><a href="https://www.jewishoakland.org/women/jwc/">Jewish Women's Circle</a></h3>
+          <p>Classes and gatherings for women, including the Mega Challah Bake.</p>
+          <ul>
+            <li><a href="https://www.jewishoakland.org/women/mega-challah-bake/mega-challah-bake/">Mega Challah Bake</a></li>
+            <li><a href="https://www.jewishoakland.org/adulted/womens-tanya-class/">Women's Tanya</a></li>
+            <li><a href="https://www.jewishoakland.org/women/siddur/">Siddur Soirée</a></li>
+          </ul>
+        </article>
+        <article class="program">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V7l8-4 8 4v12M4 11h16M9 19v-4h6v4"/></svg></div>
+          <h3><a href="https://www.jewishoakland.org/category/youth/hebschool/">Hebrew School</a></h3>
+          <p>Hebrew School of the Arts, with the Aleph Champ reading program. Come try a first class.</p>
+          <ul>
+            <li><a href="https://www.jewishoakland.org/youth/hebschool/first-taste-hebrew-school-class/">First Taste class</a></li>
+            <li><a href="https://www.jewishoakland.org/youth/hebschool/dates-rates/">Dates &amp; Rates</a></li>
+            <li><a href="https://www.jewishoakland.org/youth/hebschool/registration/">Register</a></li>
+          </ul>
+        </article>
+        <article class="program">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M6 21v-4a6 6 0 0 1 12 0v4M3 13l3 2M21 13l-3 2"/></svg></div>
+          <h3><a href="https://www.jewishoakland.org/category/youth/">Kids &amp; Teens</a></h3>
+          <p>From Mommy &amp; Me and Gani Preschool to Mini Chefs, camp and CTeen.</p>
+          <ul>
+            <li><a href="https://www.jewishoakland.org/youth/mommy-me/">Mommy &amp; Me</a></li>
+            <li><a href="https://www.jewishoakland.org/youth/gani-jewish-preschool/">Gani Preschool</a></li>
+            <li><a href="https://www.jewishoakland.org/youth/camp/">Culinary Camp</a></li>
+            <li><a href="https://www.jewishoakland.org/category/youth/cteen/">CTeen</a></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block welcome">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" style="color:var(--gold)">Everyone is welcome</p>
+        <h2>Come as you are</h2>
+        <p>Chabad Oakland is an innovative, inclusive, Jewish outreach organization dedicated to fostering a vibrant and engaged community in Oakland.</p>
+        <ul class="values">
+          <li>For families</li>
+          <li>For singles</li>
+          <li>For any age</li>
+          <li>We are inclusive</li>
+          <li>Warm and welcoming</li>
+          <li>To each on their level</li>
+        </ul>
+        <div class="actions">
+          <a class="btn btn-gold" href="https://www.jewishoakland.org/main/about-us/">About us</a>
+          <a class="btn btn-ghost" href="https://www.jewishoakland.org/our-staff/">Meet our staff</a>
+        </div>
+      </div>
+      <div class="photo">
+        <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/gallery2-1-768x512.jpg" alt="Collage of photos from Chabad Oakland community events" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Explore</p>
+          <h2>Learn more</h2>
+        </div>
+      </div>
+      <div class="quick">
+        <a href="https://www.jewishoakland.org/main/our-space">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2019/01/20190102_1419572-768x369.jpg" alt="" loading="lazy">
+          <div><strong>Our Space</strong><small>Our center on Lakeshore Ave</small></div>
+        </a>
+        <a href="https://www.jewishoakland.org/main/jewish-learning-practice/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/ask-465x279.jpg" alt="" loading="lazy">
+          <div><strong>Jewish Learning &amp; Practice</strong><small>Holidays, customs and Torah</small></div>
+        </a>
+        <a href="https://www.jewishoakland.org/main/ask-the-rabbi/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/rebbe-e1554329220908.jpg" alt="" loading="lazy">
+          <div><strong>Ask the Rabbi</strong><small>Send us your question</small></div>
+        </a>
+        <a href="https://www.jewishoakland.org/main/photo-gallery">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/Shabbat-Dinner-460x270.jpg" alt="" loading="lazy">
+          <div><strong>Photo Gallery</strong><small>Moments from our community</small></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block support">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Partner with us</p>
+        <h2>Help Jewish life grow in Oakland</h2>
+        <p class="lede">Chabad Jewish Center of Oakland is a registered 501(c)(3) nonprofit. Your support keeps our programs open to everyone.</p>
+        <p style="margin-top:24px"><a class="btn btn-navy" href="https://www.jewishoakland.org/main/donate/">Donate</a></p>
+      </div>
+      <div class="give-list">
+        <a class="give" href="https://www.jewishoakland.org/building-campaign/capital-campaign/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2019/01/campaign-promo-460x270.jpg" alt="" loading="lazy">
+          <div><strong>Capital Campaign</strong><small>Building our center for Jewish life</small></div>
+        </a>
+        <a class="give" href="https://www.jewishoakland.org/campaigns/security-fund/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2023/10/security-promo-2-460x270.jpg" alt="" loading="lazy">
+          <div><strong>Security Campaign</strong><small>Keeping our community safe</small></div>
+        </a>
+        <a class="give" href="https://www.jewishoakland.org/shul/kiddush-sponsorship/">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/donate-1-465x310.jpg" alt="" loading="lazy">
+          <div><strong>Sponsor a Kiddush</strong><small>Sponsor our Shabbat Kiddush</small></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="visit">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Visit</p>
+          <h2>We'd love to meet you</h2>
+        </div>
+      </div>
+      <div class="visit">
+        <div class="card">
+          <h3>Address</h3>
+          <p>3014 Lakeshore Ave<br>Oakland, CA 94610</p>
+          <p><a href="https://maps.google.com/?q=3014+Lakeshore+Ave+Oakland+CA+94610">Get directions</a></p>
+        </div>
+        <div class="card">
+          <h3>Call or WhatsApp</h3>
+          <p><a href="tel:+15105456770">510.545.6770</a></p>
+          <p><a href="https://wa.me/15105456770">Message us on WhatsApp</a></p>
+        </div>
+        <div class="card">
+          <h3>Email</h3>
+          <p><a href="mailto:info@jewishoakland.org">info@jewishoakland.org</a></p>
+          <p><a href="https://www.jewishoakland.org/main/newsletter/">Get our newsletter</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <a class="footer-logo" href="https://www.jewishoakland.org/"><img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/cropped-logo-new-1.png" alt="Chabad Oakland"></a>
+      <p>3014 Lakeshore Ave, Oakland, CA 94610<br>510.545.6770 · info@jewishoakland.org</p>
+    </div>
+    <div>
+      <h4>About</h4>
+      <ul>
+        <li><a href="https://www.jewishoakland.org/main/about-us/">About Us</a></li>
+        <li><a href="https://www.jewishoakland.org/main/our-history/">Our History</a></li>
+        <li><a href="https://www.jewishoakland.org/our-staff/">Our Staff</a></li>
+        <li><a href="https://www.jewishoakland.org/main/visitors-info/">Visitors Info</a></li>
+        <li><a href="https://www.jewishoakland.org/main/what-to-expect-at-chabad/">What to Expect</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Community</h4>
+      <ul>
+        <li><a href="https://www.jewishoakland.org/main/newsletter/">Newsletter</a></li>
+        <li><a href="https://www.jewishoakland.org/main/jewish-community-survey/">Community Survey</a></li>
+        <li><a href="https://www.jewishoakland.org/main/ask-the-rabbi/">Ask the Rabbi</a></li>
+        <li><a href="https://www.jewishoakland.org/main/photo-gallery">Photo Gallery</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/jewishoak/">Facebook</a></li>
+        <li><a href="https://www.instagram.com/jewishoakland">Instagram</a></li>
+        <li><a href="https://www.instagram.com/yjpoakland/">YJP on Instagram</a></li>
+        <li><a href="https://www.jewishoakland.org/main/donate/">Donate</a></li>
+      </ul>
+    </div>
+    <p class="legal">© Copyright 2006–<span id="year">2026</span> by Chabad Jewish Center of Oakland Inc. A registered 501(c)(3) nonprofit organization.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  (function () {
+    var btn = document.querySelector('.menu-toggle');
+    var nav = document.getElementById('main-nav');
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+  })();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Hebrew date, from the browser's built-in Hebrew calendar
+  (function () {
+    try {
+      var now = new Date();
+      var heb = new Intl.DateTimeFormat('he-u-ca-hebrew', { day: 'numeric', month: 'long', year: 'numeric' }).format(now);
+      var eng = new Intl.DateTimeFormat('en-u-ca-hebrew', { day: 'numeric', month: 'long', year: 'numeric' }).format(now);
+      document.getElementById('hebrew-date').textContent = eng + ' · ' + heb;
+    } catch (e) {}
+  })();
+
+  // This week's candle lighting for Oakland (Hebcal, 18 minutes before sunset)
+  (function () {
+    fetch('https://www.hebcal.com/shabbat?cfg=json&latitude=37.8107&longitude=-122.2437&tzid=America/Los_Angeles&b=18&M=on')
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var items = data.items || [];
+        var candles = items.find(function (i) { return i.category === 'candles'; });
+        var havdalah = items.find(function (i) { return i.category === 'havdalah'; });
+        var parsha = items.find(function (i) { return i.category === 'parashat'; });
+        if (!candles) return;
+        var d = new Date(candles.date);
+        var day = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'America/Los_Angeles' });
+        var time = d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' });
+        document.getElementById('candles').textContent = day + ' · ' + time;
+        var note = [];
+        if (parsha) note.push(parsha.title);
+        if (havdalah) {
+          var h = new Date(havdalah.date).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' });
+          note.push('Havdalah ' + h);
+        }
+        if (note.length) document.getElementById('candles-note').textContent = note.join(' · ');
+      })
+      .catch(function () {});
+  })();
+</script>
+</body>
+</html>
