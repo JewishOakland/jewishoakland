@@ -13,12 +13,12 @@ Open `index.html` in a browser. Or upload the whole `wedding-hall/` folder to an
 | `index.html` | All the content and structure |
 | `css/styles.css` | Colours, type and layout. The colour and font tokens are at the top, in `:root` |
 | `js/main.js` | Slideshow, photo strip, photo viewer, reveal-on-scroll and enquiry form |
-| `images/` | Photographs. Replace these with the hall's own images |
+| `images/` | The hall's photographs, resized for the web |
 
 ## Before launch
 
 1. **Venue name.** "Lakeshore Hall" is a working name. Search for it in `index.html` and `README` and replace it everywhere it appears (header, hero, footer, page title).
-2. **Photos.** Replace the files in `images/` with full-resolution photographs of the hall (at least 2400px wide, landscape for the hero, portrait for the strip). Keep the same file names, or update the `src` values in `index.html`. The current images are small and are placeholders.
+2. **Photos.** The `images/` folder holds the hall photographs (`hall-01.jpg` to `hall-09.jpg`), resized to 2400px wide. To change them, add the new files and update the `src` and `alt` values in `index.html`. The hero uses four photos and the strip uses all nine.
 3. **Copy.** Review every paragraph, especially the planning steps and the three celebration cards, and make sure they describe what the venue actually offers.
 4. **Enquiry inbox.** The form opens an email to the address set in `ENQUIRY_EMAIL` at the top of `js/main.js`. Change it to the venue's own inbox. The page does not store or send anything itself. For a form that saves enquiries, connect a form service and point the form's `submit` handler at it.
 5. **Contact details.** Check the address, phone, WhatsApp and email in the Visit section and the footer.
