@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rent Our Hall | Chabad Jewish Center of Oakland</title>
+<meta name="description" content="Host your celebration, lecture or community gathering at Chabad Jewish Center of Oakland on Lake Merritt. Request a date or call for a quote.">
+<link rel="icon" href="https://www.jewishoakland.org/wp-content/uploads/2019/01/cropped-logo-sm-2-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #14306b;
+    --navy-deep: #0d1f47;
+    --gold: #e0a526;
+    --gold-soft: #fbf1db;
+    --cream: #faf7f1;
+    --ink: #1d2433;
+    --muted: #5b6375;
+    --line: #e4dfd4;
+    --white: #ffffff;
+    --radius: 14px;
+    --wrap: 1180px;
+    --serif: "Fraunces", Georgia, serif;
+    --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--sans); font-size: 18px; line-height: 1.6; color: var(--ink); background: var(--white); }
+  img { max-width: 100%; display: block; }
+  a { color: var(--navy); }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; margin: 0 0 .5em; color: var(--navy-deep); }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); }
+  h3 { font-size: 1.3rem; }
+  p { margin: 0 0 1em; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 20px; }
+  .eyebrow { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #a8730a; margin: 0 0 .6em; }
+  .lede { font-size: 1.15rem; color: var(--muted); max-width: 46ch; }
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 16px; top: 16px; z-index: 100; background: var(--white); padding: 8px 14px; border-radius: 8px; }
+
+  .btn { display: inline-flex; align-items: center; gap: .5em; padding: .8em 1.4em; border-radius: 999px; font: inherit; font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: transform .15s ease, background .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-gold { background: var(--gold); color: var(--navy-deep); }
+  .btn-gold:hover { background: #f0b73a; }
+  .btn-ghost { border-color: rgba(255,255,255,.8); color: var(--white); background: transparent; }
+  .btn-ghost:hover { background: rgba(255,255,255,.12); }
+  .btn-navy { background: var(--navy); color: var(--white); }
+  .btn-navy:hover { background: var(--navy-deep); }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+  /* Top bar */
+  .topbar { background: var(--navy-deep); color: #d6dcec; font-size: .9rem; }
+  .topbar .wrap { display: flex; justify-content: space-between; gap: 16px; padding-top: 8px; padding-bottom: 8px; flex-wrap: wrap; }
+  .topbar a { color: #fff; text-decoration: none; }
+  .topbar a:hover { text-decoration: underline; }
+  .topbar .links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+  /* Header */
+  header.site { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 78px; }
+  .logo img { height: 56px; width: auto; }
+  nav.main ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; align-items: center; }
+  nav.main a { display: block; padding: 8px 12px; border-radius: 8px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: .98rem; }
+  nav.main a:hover { background: var(--cream); color: var(--navy); }
+  nav.main .btn { margin-left: 8px; padding: .6em 1.2em; }
+  .menu-toggle { display: none; background: none; border: 2px solid var(--line); border-radius: 10px; padding: 8px 12px; font: inherit; font-weight: 700; color: var(--navy); cursor: pointer; }
+
+  /* Hero slideshow */
+  .hero { position: relative; overflow: hidden; color: var(--white); background: var(--navy-deep); min-height: clamp(560px, 82vh, 760px); display: flex; align-items: center; }
+  .slides { position: absolute; inset: 0; }
+  .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s ease; }
+  .slide.is-active { opacity: 1; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); transition: transform 9s ease-out; }
+  .slide.is-active img { transform: scale(1); }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(100deg, rgba(13,31,71,.94) 0%, rgba(13,31,71,.75) 45%, rgba(13,31,71,.3) 100%); }
+  .hero .wrap { position: relative; z-index: 2; padding-top: clamp(64px, 10vw, 110px); padding-bottom: clamp(96px, 12vw, 130px); }
+  .hero .eyebrow { color: var(--gold); }
+  .hero h1 { color: var(--white); font-size: clamp(2.4rem, 6vw, 4.2rem); max-width: 14ch; }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero p { font-size: clamp(1.1rem, 2vw, 1.3rem); max-width: 40ch; color: #e7ebf5; margin: 0 0 1.8em; }
+  .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .slide-toggle { position: absolute; z-index: 3; right: 20px; bottom: 20px; background: rgba(13,31,71,.7); color: var(--white); border: 1px solid rgba(255,255,255,.4); border-radius: 999px; padding: 8px 16px; font: inherit; font-size: .9rem; font-weight: 700; cursor: pointer; }
+  .slide-toggle:hover { background: rgba(13,31,71,.9); }
+  .dots { position: absolute; z-index: 3; left: 0; right: 0; bottom: 24px; display: flex; justify-content: center; gap: 8px; pointer-events: none; }
+  .dots span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.45); transition: background .3s ease, transform .3s ease; }
+  .dots span.is-active { background: var(--gold); transform: scale(1.3); }
+
+  /* Info strip */
+  .strip { background: var(--cream); border-bottom: 1px solid var(--line); }
+  .strip .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .strip .cell { padding: 22px 24px; border-right: 1px solid var(--line); }
+  .strip .cell:last-child { border-right: 0; }
+  .strip .label { font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .strip .value { font-family: var(--serif); font-size: 1.25rem; color: var(--navy-deep); margin: 2px 0; }
+  .strip .note { font-size: .92rem; color: var(--muted); }
+  .strip .note a { font-weight: 600; }
+
+  section.block { padding: clamp(56px, 8vw, 96px) 0; }
+  .section-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
+  .section-head p { margin: 0; }
+
+  /* Gallery */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 240px; gap: 16px; }
+  .shot { position: relative; display: block; border-radius: var(--radius); overflow: hidden; background: var(--cream); }
+  .shot:first-child { grid-column: span 2; grid-row: span 2; }
+  .shot:nth-child(5) { grid-column: span 2; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .shot:hover img { transform: scale(1.06); }
+  .shot::after { content: "View"; position: absolute; right: 12px; bottom: 12px; background: rgba(13,31,71,.8); color: var(--white); font-size: .85rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .3s ease; }
+  .shot:hover::after, .shot:focus-visible::after { opacity: 1; transform: translateY(0); }
+
+  /* Lightbox */
+  dialog.lightbox { border: 0; padding: 0; background: transparent; width: min(1100px, 94vw); max-height: 92vh; }
+  dialog.lightbox::backdrop { background: rgba(8,16,36,.88); }
+  dialog.lightbox img { width: 100%; max-height: 80vh; object-fit: contain; border-radius: var(--radius); background: var(--navy-deep); }
+  .lb-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(255,255,255,.9); color: var(--navy-deep); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+  .lb-prev { left: -16px; }
+  .lb-next { right: -16px; }
+  .lb-close { position: absolute; top: -14px; right: -6px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--gold); color: var(--navy-deep); font-size: 1.3rem; font-weight: 700; cursor: pointer; }
+  .lb-wrap { position: relative; }
+
+  /* Event types */
+  .types { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .type { padding: 28px; border-radius: var(--radius); background: var(--cream); border: 1px solid var(--line); }
+  .type .icon { width: 48px; height: 48px; border-radius: 12px; background: var(--navy); color: var(--gold); display: grid; place-items: center; margin-bottom: 18px; }
+  .type .icon svg { width: 26px; height: 26px; }
+  .type p { color: var(--muted); margin: 0; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; counter-reset: step; list-style: none; padding: 0; margin: 0; }
+  .steps li { position: relative; padding: 28px 28px 28px 28px; border-radius: var(--radius); border: 1px solid var(--line); counter-increment: step; }
+  .steps li::before { content: counter(step); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--gold); color: var(--navy-deep); font-family: var(--serif); font-weight: 600; font-size: 1.2rem; margin-bottom: 14px; }
+  .steps p { color: var(--muted); margin: 0; }
+
+  /* Request form */
+  .request { background: var(--navy-deep); color: #e7ebf5; }
+  .request h2 { color: var(--white); }
+  .request .wrap { display: grid; grid-template-columns: 1fr 1.25fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  .request .eyebrow { color: var(--gold); }
+  .request .lede { color: #c3cbe0; }
+  .contact-list { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 14px; }
+  .contact-list li { display: flex; flex-direction: column; }
+  .contact-list small { color: #a9b3cc; text-transform: uppercase; letter-spacing: .1em; font-size: .75rem; font-weight: 700; }
+  .contact-list a { color: var(--white); font-weight: 600; font-size: 1.1rem; text-decoration: none; }
+  .contact-list a:hover { text-decoration: underline; }
+  form.inquiry { background: var(--white); color: var(--ink); border-radius: var(--radius); padding: clamp(24px, 4vw, 36px); box-shadow: 0 20px 48px rgba(0,0,0,.3); display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
+  form.inquiry label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: .95rem; color: var(--navy-deep); }
+  form.inquiry .full { grid-column: 1 / -1; }
+  form.inquiry input, form.inquiry select, form.inquiry textarea { font: inherit; font-size: 1rem; color: var(--ink); padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--white); width: 100%; }
+  form.inquiry input:focus, form.inquiry select:focus, form.inquiry textarea:focus { outline: 3px solid var(--gold); outline-offset: 1px; border-color: transparent; }
+  form.inquiry textarea { min-height: 110px; resize: vertical; }
+  form.inquiry button { justify-self: start; }
+  form.inquiry .fine { grid-column: 1 / -1; font-size: .88rem; color: var(--muted); margin: 0; }
+
+  /* Visit */
+  .visit { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .visit .card { padding: 26px; border: 1px solid var(--line); border-radius: var(--radius); }
+  .visit .card p { margin: 0 0 6px; }
+  .visit .card a { font-weight: 600; }
+
+  footer.site { background: var(--navy-deep); color: #c3cbe0; font-size: .95rem; padding: 48px 0 32px; }
+  footer.site .wrap { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
+  footer.site h4 { color: var(--white); font-family: var(--sans); font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 12px; }
+  footer.site ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+  footer.site a { color: #e7ebf5; text-decoration: none; }
+  footer.site a:hover { text-decoration: underline; }
+  footer.site .legal { grid-column: 1 / -1; border-top: 1px solid rgba(255,255,255,.12); padding-top: 20px; font-size: .85rem; }
+  .footer-logo { background: var(--white); display: inline-block; padding: 10px 14px; border-radius: 10px; margin-bottom: 14px; }
+  .footer-logo img { height: 44px; }
+
+  @media (max-width: 1060px) {
+    .types { grid-template-columns: repeat(2, 1fr); }
+    footer.site .wrap { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 960px) {
+    .menu-toggle { display: block; }
+    nav.main { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--line); padding: 12px 20px 20px; }
+    nav.main.open { display: block; }
+    nav.main ul { flex-direction: column; align-items: stretch; }
+    nav.main .btn { margin: 8px 0 0; justify-content: center; }
+    .request .wrap { grid-template-columns: 1fr; }
+    .visit { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 17px; }
+    .hero .wrap { padding-bottom: 110px; }
+    .hero::before { background: rgba(13,31,71,.85); }
+    .strip .wrap { grid-template-columns: 1fr; }
+    .strip .cell { border-right: 0; border-bottom: 1px solid var(--line); padding: 16px 0; }
+    .strip .cell:last-child { border-bottom: 0; }
+    .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+    .shot:first-child { grid-column: 1 / -1; grid-row: auto; }
+    .shot:nth-child(5) { grid-column: auto; }
+    .types { grid-template-columns: 1fr; }
+    form.inquiry { grid-template-columns: 1fr; }
+    .lb-prev { left: 4px; }
+    .lb-next { right: 4px; }
+    .topbar .links { display: none; }
+    footer.site .wrap { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+    .slide img, .shot img { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>Chabad Jewish Center of Oakland</span>
+    <div class="links">
+      <a href="https://www.jewishoakland.org/main/about-us/">About</a>
+      <a href="https://www.jewishoakland.org/main/newsletter/">Newsletter</a>
+      <a href="https://www.jewishoakland.org/main/ask-the-rabbi/">Ask the Rabbi</a>
+      <a href="tel:+15105456770">510.545.6770</a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="https://www.jewishoakland.org/" aria-label="Chabad Oakland home">
+      <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/cropped-logo-new-1.png" alt="Chabad Oakland">
+    </a>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+    <nav class="main" id="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="https://www.jewishoakland.org/category/shul/">Synagogue</a></li>
+        <li><a href="https://www.jewishoakland.org/category/adulted/">Learning</a></li>
+        <li><a href="https://www.jewishoakland.org/category/yjp/">Young Professionals</a></li>
+        <li><a href="https://www.jewishoakland.org/category/women/">Women</a></li>
+        <li><a href="https://www.jewishoakland.org/category/youth/">Youth &amp; Family</a></li>
+        <li><a class="btn btn-gold" href="https://www.jewishoakland.org/main/donate/">Donate</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+
+  <section class="hero" aria-label="Our hall">
+    <div class="slides" aria-hidden="true">
+      <div class="slide is-active"><img src="https://www.jewishoakland.org/wp-content/uploads/2019/01/cover4.jpg" alt=""></div>
+      <div class="slide"><img src="https://www.jewishoakland.org/wp-content/uploads/2019/01/20190102_1423252-920x425.jpg" alt=""></div>
+      <div class="slide"><img src="https://www.jewishoakland.org/wp-content/uploads/2019/01/20190102_1419572-768x369.jpg" alt=""></div>
+      <div class="slide"><img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/gallery2-1-768x512.jpg" alt=""></div>
+    </div>
+    <div class="wrap">
+      <p class="eyebrow">Hall rental · Lake Merritt, Oakland</p>
+      <h1>A warm room for your <em>next celebration</em></h1>
+      <p>Weddings, bar and bat mitzvahs, lectures and community gatherings, in a space that feels like home.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#request">Request a date</a>
+        <a class="btn btn-ghost" href="#gallery">See the space</a>
+      </div>
+    </div>
+    <div class="dots" aria-hidden="true">
+      <span class="is-active"></span><span></span><span></span><span></span>
+    </div>
+    <button class="slide-toggle" id="slide-toggle" type="button">Pause photos</button>
+  </section>
+
+  <div class="strip">
+    <div class="wrap">
+      <div class="cell">
+        <div class="label">Location</div>
+        <div class="value">3014 Lakeshore Ave</div>
+        <div class="note">Grand Lake, Oakland · <a href="https://maps.google.com/?q=3014+Lakeshore+Ave+Oakland+CA+94610">Directions</a></div>
+      </div>
+      <div class="cell">
+        <div class="label">Good for</div>
+        <div class="value">Celebrations &amp; gatherings</div>
+        <div class="note">Simchas, lectures, meetings and more</div>
+      </div>
+      <div class="cell">
+        <div class="label">Rates</div>
+        <div class="value">Call for a quote</div>
+        <div class="note">Pricing depends on date, length and setup</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Take a look</p>
+          <h2>Photos of the space</h2>
+          <p class="lede">Select any photo to view it larger.</p>
+        </div>
+      </div>
+      <div class="gallery">
+        <a class="shot" href="https://www.jewishoakland.org/wp-content/uploads/2019/01/cover4.jpg">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2019/01/cover4.jpg" alt="Chabad Oakland building" loading="lazy">
+        </a>
+        <a class="shot" href="https://www.jewishoakland.org/wp-content/uploads/2019/01/20190102_1423252-920x425.jpg">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2019/01/20190102_1423252-920x425.jpg" alt="Inside Chabad Oakland" loading="lazy">
+        </a>
+        <a class="shot" href="https://www.jewishoakland.org/wp-content/uploads/2019/01/20190102_1419572-768x369.jpg">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2019/01/20190102_1419572-768x369.jpg" alt="Chabad Oakland space" loading="lazy">
+        </a>
+        <a class="shot" href="https://www.jewishoakland.org/wp-content/uploads/2018/12/gallery2-1-768x512.jpg">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/gallery2-1-768x512.jpg" alt="Community event at Chabad Oakland" loading="lazy">
+        </a>
+        <a class="shot" href="https://www.jewishoakland.org/wp-content/uploads/2018/12/Shabbat-Dinner-460x270.jpg">
+          <img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/Shabbat-Dinner-460x270.jpg" alt="Shabbat dinner at Chabad Oakland" loading="lazy">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">What you can host</p>
+          <h2>Made for the moments that matter</h2>
+        </div>
+      </div>
+      <div class="types">
+        <article class="type">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div>
+          <h3>Celebrations</h3>
+          <p>Weddings, engagement parties, bar and bat mitzvah receptions and anniversaries.</p>
+        </article>
+        <article class="type">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h7a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H2zM22 5h-7a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h8z"/></svg></div>
+          <h3>Lectures &amp; classes</h3>
+          <p>Talks, study groups and workshops for groups of any size.</p>
+        </article>
+        <article class="type">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M15 14.5a5 5 0 0 1 6.5 4.8"/></svg></div>
+          <h3>Community gatherings</h3>
+          <p>Fundraisers, holiday parties, memorial gatherings and neighborhood get-togethers.</p>
+        </article>
+        <article class="type">
+          <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v14H4V6a1 1 0 0 1 1-1z"/></svg></div>
+          <h3>Meetings &amp; events</h3>
+          <p>Board meetings, trainings, nonprofit events and corporate gatherings.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2>Booking is simple</h2>
+        </div>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Pick a date</h3>
+          <p>Tell us the date you have in mind, or a few options. We'll check availability with you.</p>
+        </li>
+        <li>
+          <h3>Tell us about your event</h3>
+          <p>Share your guest count, the setup you need and any questions. We'll put together a quote.</p>
+        </li>
+        <li>
+          <h3>Confirm and celebrate</h3>
+          <p>Once the details and agreement are set, your date is held and we'll help you get ready.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block request" id="request">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Request a date</p>
+        <h2>Let's plan your event</h2>
+        <p class="lede">Send us a few details and we'll reply with availability and a quote. Prefer to talk? Call us any time.</p>
+        <ul class="contact-list">
+          <li><small>Call or WhatsApp</small><a href="tel:+15105456770">510.545.6770</a></li>
+          <li><small>Email</small><a href="mailto:info@jewishoakland.org">info@jewishoakland.org</a></li>
+          <li><small>Visit</small><a href="https://maps.google.com/?q=3014+Lakeshore+Ave+Oakland+CA+94610">3014 Lakeshore Ave, Oakland, CA 94610</a></li>
+        </ul>
+      </div>
+      <form class="inquiry" id="inquiry">
+        <label>Your name
+          <input type="text" name="name" autocomplete="name" required>
+        </label>
+        <label>Email
+          <input type="email" name="email" autocomplete="email" required>
+        </label>
+        <label>Phone
+          <input type="tel" name="phone" autocomplete="tel">
+        </label>
+        <label>Type of event
+          <select name="type">
+            <option>Celebration</option>
+            <option>Lecture or class</option>
+            <option>Community gathering</option>
+            <option>Meeting or event</option>
+            <option>Something else</option>
+          </select>
+        </label>
+        <label>Preferred date
+          <input type="date" name="date">
+        </label>
+        <label>Expected guests
+          <input type="number" name="guests" min="1" inputmode="numeric">
+        </label>
+        <label class="full">Tell us more
+          <textarea name="message" placeholder="Timing, setup, catering or anything else we should know"></textarea>
+        </label>
+        <button class="btn btn-navy full" type="submit" style="justify-self:start">Send request</button>
+        <p class="fine">This opens an email to our office with your details. Nothing is booked until we've confirmed.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="block" id="visit">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Visit</p>
+          <h2>Come see the space</h2>
+        </div>
+      </div>
+      <div class="visit">
+        <div class="card">
+          <h3>Address</h3>
+          <p>3014 Lakeshore Ave<br>Oakland, CA 94610</p>
+          <p><a href="https://maps.google.com/?q=3014+Lakeshore+Ave+Oakland+CA+94610">Get directions</a></p>
+        </div>
+        <div class="card">
+          <h3>Call or WhatsApp</h3>
+          <p><a href="tel:+15105456770">510.545.6770</a></p>
+          <p><a href="https://wa.me/15105456770">Message us on WhatsApp</a></p>
+        </div>
+        <div class="card">
+          <h3>Email</h3>
+          <p><a href="mailto:info@jewishoakland.org">info@jewishoakland.org</a></p>
+          <p><a href="https://www.jewishoakland.org/main/about-us/">About Chabad Oakland</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+  <div class="lb-wrap">
+    <img src="" alt="">
+    <button class="lb-close" type="button" aria-label="Close photo">×</button>
+    <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">‹</button>
+    <button class="lb-btn lb-next" type="button" aria-label="Next photo">›</button>
+  </div>
+</dialog>
+
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <a class="footer-logo" href="https://www.jewishoakland.org/"><img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/cropped-logo-new-1.png" alt="Chabad Oakland"></a>
+      <p>3014 Lakeshore Ave, Oakland, CA 94610<br>510.545.6770 · info@jewishoakland.org</p>
+    </div>
+    <div>
+      <h4>About</h4>
+      <ul>
+        <li><a href="https://www.jewishoakland.org/main/about-us/">About Us</a></li>
+        <li><a href="https://www.jewishoakland.org/main/our-history/">Our History</a></li>
+        <li><a href="https://www.jewishoakland.org/our-staff/">Our Staff</a></li>
+        <li><a href="https://www.jewishoakland.org/main/visitors-info/">Visitors Info</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Community</h4>
+      <ul>
+        <li><a href="https://www.jewishoakland.org/main/newsletter/">Newsletter</a></li>
+        <li><a href="https://www.jewishoakland.org/main/ask-the-rabbi/">Ask the Rabbi</a></li>
+        <li><a href="https://www.jewishoakland.org/main/photo-gallery">Photo Gallery</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="https://www.facebook.com/jewishoak/">Facebook</a></li>
+        <li><a href="https://www.instagram.com/jewishoakland">Instagram</a></li>
+        <li><a href="https://www.jewishoakland.org/main/donate/">Donate</a></li>
+      </ul>
+    </div>
+    <p class="legal">© Copyright 2006–<span id="year">2026</span> by Chabad Jewish Center of Oakland Inc. A registered 501(c)(3) nonprofit organization.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  (function () {
+    var btn = document.querySelector('.menu-toggle');
+    var nav = document.getElementById('main-nav');
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open);
+    });
+  })();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Hero slideshow: crossfades every 6 seconds, can be paused.
+  // Starts paused for visitors who ask the system to reduce motion.
+  (function () {
+    var slides = document.querySelectorAll('.slide');
+    var dots = document.querySelectorAll('.dots span');
+    var toggle = document.getElementById('slide-toggle');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var current = 0;
+    var timer = null;
+
+    function show(n) {
+      slides[current].classList.remove('is-active');
+      dots[current].classList.remove('is-active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('is-active');
+      dots[current].classList.add('is-active');
+    }
+
+    function setPlaying(playing) {
+      clearInterval(timer);
+      timer = playing ? setInterval(function () { show(current + 1); }, 6000) : null;
+      toggle.textContent = playing ? 'Pause photos' : 'Play photos';
+      toggle.dataset.playing = playing;
+    }
+
+    toggle.addEventListener('click', function () {
+      setPlaying(toggle.dataset.playing !== 'true');
+    });
+
+    setPlaying(!reduce);
+  })();
+
+  // Gallery lightbox
+  (function () {
+    var dialog = document.getElementById('lightbox');
+    var image = dialog.querySelector('img');
+    var shots = Array.prototype.slice.call(document.querySelectorAll('.shot'));
+    var current = 0;
+
+    function openAt(n) {
+      current = (n + shots.length) % shots.length;
+      var link = shots[current];
+      image.src = link.href;
+      image.alt = link.querySelector('img').alt;
+      if (!dialog.open) dialog.showModal();
+    }
+
+    shots.forEach(function (shot, n) {
+      shot.addEventListener('click', function (e) {
+        e.preventDefault();
+        openAt(n);
+      });
+    });
+
+    dialog.querySelector('.lb-prev').addEventListener('click', function () { openAt(current - 1); });
+    dialog.querySelector('.lb-next').addEventListener('click', function () { openAt(current + 1); });
+    dialog.querySelector('.lb-close').addEventListener('click', function () { dialog.close(); });
+
+    // Click on the dark backdrop closes the viewer
+    dialog.addEventListener('click', function (e) {
+      if (e.target === dialog) dialog.close();
+    });
+
+    dialog.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') openAt(current - 1);
+      if (e.key === 'ArrowRight') openAt(current + 1);
+    });
+  })();
+
+  // Inquiry form: opens a pre-filled email to the office
+  document.getElementById('inquiry').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var data = new FormData(e.target);
+    var body = [
+      'Name: ' + data.get('name'),
+      'Email: ' + data.get('email'),
+      'Phone: ' + (data.get('phone') || '-'),
+      'Type of event: ' + data.get('type'),
+      'Preferred date: ' + (data.get('date') || 'Flexible'),
+      'Expected guests: ' + (data.get('guests') || '-'),
+      '',
+      data.get('message') || ''
+    ].join('\n');
+    var subject = 'Hall rental inquiry from ' + data.get('name');
+    window.location.href = 'mailto:info@jewishoakland.org?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+</script>
+</body>
+</html>

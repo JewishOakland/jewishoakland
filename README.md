@@ -14,6 +14,17 @@
 8. **Partner with us**: Donate, Capital Campaign, Security Campaign, Kiddush sponsorship.
 9. **Visit**: address, phone/WhatsApp, email, newsletter. Then the footer.
 
+## Hall rental page
+
+`hall-rental.html` is a self-contained page for renting the hall. It has:
+
+- A full-width photo slideshow in the hero (crossfades every 6 seconds, with a pause button; it starts paused for visitors who prefer reduced motion)
+- A photo gallery that opens each image in a viewer (arrow keys and Esc work)
+- Event types, a three-step booking explanation, and an inquiry form
+- The inquiry form opens a pre-filled email to info@jewishoakland.org. It does not store or send anything itself.
+
+Before publishing, replace the placeholder photos with real photos of the hall, and confirm the "Good for" and "How it works" wording with the office. Rates are shown as "Call for a quote" on purpose.
+
 ## Putting it on WordPress
 
 The live site runs WordPress with the Unos Premium theme. Two ways to use this design there:
