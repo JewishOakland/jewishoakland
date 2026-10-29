@@ -195,6 +195,15 @@ h3 { font-size: 1.6rem; }
   margin: 0;
   line-height: 1;
 }
+.hero-tag {
+  margin: 18px 0 0;
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  text-shadow: 0 1px 14px rgba(20,16,13,.7);
+}
 .divider {
   display: block;
   width: 96px;
