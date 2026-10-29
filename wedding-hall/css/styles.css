@@ -256,23 +256,15 @@ h3 { font-size: 1.6rem; }
 }
 
 /* Celebrations */
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .card {
-  padding: 52px 40px 48px;
+  padding: 48px 28px 44px;
   border: 1px solid var(--line);
   background: var(--white);
   text-align: center;
   transition: transform .6s var(--ease), box-shadow .6s var(--ease);
 }
 .card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -28px rgba(42,36,32,.35); }
-.card-num {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.1rem;
-  letter-spacing: .2em;
-  color: var(--champagne);
-  margin: 0 0 14px;
-}
 .card h3 { margin-bottom: .6em; }
 .card p { color: var(--muted); margin: 0; }
 
@@ -456,7 +448,7 @@ h3 { font-size: 1.6rem; }
   .nav a { padding: 14px 28px; width: 100%; }
   .nav a::after { display: none; }
   .nav-cta { margin: 12px 28px 0; width: auto; text-align: center; }
-  .cards { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .cards { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr 1fr; row-gap: 48px; }
   .steps li:nth-child(3) { border-left: 0; }
   .enquire-wrap { grid-template-columns: 1fr; }
@@ -473,6 +465,7 @@ h3 { font-size: 1.6rem; }
   .hero-actions { flex-direction: column; align-items: center; }
   .hero-actions .btn { width: 100%; max-width: 280px; }
   .track button { width: 240px; }
+  .cards { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .steps li { border-left: 0; border-top: 1px solid var(--line); padding: 28px 8px; }
   .steps li:first-child { border-top: 0; }

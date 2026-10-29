@@ -89,23 +89,24 @@
     <div class="wrap">
       <header class="section-head">
         <p class="eyebrow">Celebrations</p>
-        <h2>Every part of your day</h2>
+        <h2>Celebrations we host</h2>
       </header>
       <div class="cards">
         <article class="card">
-          <p class="card-num">I</p>
-          <h3>The Ceremony</h3>
-          <p>Exchange your vows in a setting of soft light, with room for your families and closest friends to gather near.</p>
+          <h3>Weddings</h3>
+          <p>Ceremony, dinner and dancing, held together in one graceful room for the day you have planned.</p>
         </article>
         <article class="card">
-          <p class="card-num">II</p>
-          <h3>The Reception</h3>
-          <p>Dinner, toasts and dancing, all in one graceful room, with a team to guide the flow of the evening.</p>
+          <h3>Bar &amp; Bas Mitzvos</h3>
+          <p>A milestone worth marking, shared with family, friends and the community that has watched you grow.</p>
         </article>
         <article class="card">
-          <p class="card-num">III</p>
-          <h3>The Details</h3>
-          <p>Thoughtful touches, from table settings to the timing of each moment, arranged with care and attention.</p>
+          <h3>Bris</h3>
+          <p>A joyful welcome for your newborn son, surrounded by the people who will love him most.</p>
+        </article>
+        <article class="card">
+          <h3>Sheva Brachos</h3>
+          <p>A festive gathering in honor of the couple's first week of marriage, with family and friends.</p>
         </article>
       </div>
     </div>
@@ -153,7 +154,17 @@
           <input id="phone" name="phone" type="tel" autocomplete="tel">
         </div>
         <div class="field">
-          <label for="date">Wedding date</label>
+          <label for="celebration">Type of celebration</label>
+          <select id="celebration" name="celebration">
+            <option>Wedding</option>
+            <option>Bar or Bas Mitzvah</option>
+            <option>Bris</option>
+            <option>Sheva Brachos</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="date">Event date</label>
           <input id="date" name="date" type="date">
         </div>
         <div class="field">

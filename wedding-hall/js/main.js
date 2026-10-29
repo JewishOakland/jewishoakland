@@ -123,6 +123,7 @@
       'Names: ' + data.get('names'),
       'Email: ' + data.get('email'),
       'Phone: ' + (data.get('phone') || '-'),
+      'Celebration: ' + data.get('celebration'),
       'Wedding date: ' + (data.get('date') || 'Flexible'),
       'Expected guests: ' + (data.get('guests') || '-'),
       'Would like to start with: ' + data.get('visit'),
