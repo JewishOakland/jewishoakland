@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery · The Zadik Hall</title>
+<meta name="description" content="Photographs of The Zadik Hall: the room, dinner setups and details.">
+<meta name="theme-color" content="#fbf8f3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="The Zadik Hall, home">
+      <span class="monogram" aria-hidden="true">Z</span>
+      <span class="brand-name">The Zadik Hall</span>
+    </a>
+    <nav id="nav" class="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="space.html">The Space</a>
+      <a href="gallery.html" aria-current="page">Gallery</a>
+      <a href="plan.html">Plan Your Event</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="bar-actions">
+      <a class="btn-ask" href="plan.html#enquire">Ask About a Date</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Gallery</p>
+      <h1>Photographs of the hall</h1>
+      <p class="lede">The room, different setups and the details. Select a photo to see it larger.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="gallery-group">
+        <h2>The room</h2>
+        <p>The hall empty, before setup.</p>
+        <div class="gallery-grid two">
+          <figure>
+            <button type="button" data-photo aria-label="View larger: The open hall, with wood floors and chandeliers"><img src="images/hall-02.jpg" alt="The open hall with wood floors, chandeliers and a long table at the far end" loading="lazy"></button>
+            <figcaption>The open hall, with wood floors and chandeliers</figcaption>
+          </figure>
+          <figure>
+            <button type="button" data-photo aria-label="View larger: Tall windows along one side of the room"><img src="images/hall-01.jpg" alt="The hall with polished wood floors, chandeliers and tall windows" loading="lazy"></button>
+            <figcaption>Tall windows along one side of the room</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h2>Dinner setups</h2>
+        <p>The same room set for different kinds of meal.</p>
+        <div class="gallery-grid two">
+          <figure>
+            <button type="button" data-photo aria-label="View larger: Long tables for a wedding dinner"><img src="images/hall-07.jpg" alt="Long tables set with white linens, flowers and chandeliers overhead" loading="lazy"></button>
+            <figcaption>Long tables for a wedding dinner</figcaption>
+          </figure>
+          <figure>
+            <button type="button" data-photo aria-label="View larger: Round tables with chair covers"><img src="images/hall-08.jpg" alt="Round tables with gold chargers and white chair covers under chandeliers" loading="lazy"></button>
+            <figcaption>Round tables with chair covers</figcaption>
+          </figure>
+          <figure>
+            <button type="button" data-photo aria-label="View larger: Long tables along the windows"><img src="images/hall-06.jpg" alt="Long tables set for dinner in the wood-ceilinged room with tall windows" loading="lazy"></button>
+            <figcaption>Long tables along the windows</figcaption>
+          </figure>
+          <figure>
+            <button type="button" data-photo aria-label="View larger: Place settings by the windows"><img src="images/hall-05.jpg" alt="Dining tables set with gold chargers and candles beside tall windows" loading="lazy"></button>
+            <figcaption>Place settings by the windows</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h2>Details</h2>
+        <p>Useful corners of the room.</p>
+        <div class="gallery-grid">
+          <figure>
+            <button type="button" data-photo aria-label="View larger: The bar and display cabinets"><img src="images/hall-04.jpg" alt="A bar with mirrored shelves and arched cabinets beside tall windows" loading="lazy"></button>
+            <figcaption>The bar and display cabinets</figcaption>
+          </figure>
+          <figure>
+            <button type="button" data-photo aria-label="View larger: A buffet set along one side"><img src="images/hall-03.jpg" alt="A buffet with white linens and gold chafing dishes beneath chandeliers" loading="lazy"></button>
+            <figcaption>A buffet set along one side</figcaption>
+          </figure>
+          <figure>
+            <button type="button" data-photo aria-label="View larger: A welcome table with name cards"><img src="images/hall-09.jpg" alt="A table of name cards set out for guests" loading="lazy"></button>
+            <figcaption>A welcome table with name cards</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+    <button class="lb-close" type="button" aria-label="Close">Close</button>
+    <button class="lb-prev" type="button" aria-label="Previous photo">&lsaquo;</button>
+    <button class="lb-next" type="button" aria-label="Next photo">&rsaquo;</button>
+  </dialog>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Planning a celebration?</h2>
+      <p>Tell us your date, your event and your guest count, and the office will let you know what is available.</p>
+      <a class="btn btn-dark" href="plan.html#enquire">Ask About a Date</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-name">The Zadik Hall</p>
+    <p>3014 Lakeshore Avenue, Oakland, CA 94610</p>
+    <p><a href="tel:+15105456770">510.545.6770</a> · <a href="mailto:info@jewishoakland.org">info@jewishoakland.org</a></p>
+    <p>© <span id="year">2026</span> The Zadik Hall</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

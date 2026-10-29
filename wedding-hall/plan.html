@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan Your Event · The Zadik Hall</title>
+<meta name="description" content="How to ask about a date at The Zadik Hall, what to tell us, rates, and the catering, rental and cleanup rules.">
+<meta name="theme-color" content="#fbf8f3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="The Zadik Hall, home">
+      <span class="monogram" aria-hidden="true">Z</span>
+      <span class="brand-name">The Zadik Hall</span>
+    </a>
+    <nav id="nav" class="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="space.html">The Space</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="plan.html" aria-current="page">Plan Your Event</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="bar-actions">
+      <a class="btn-ask" href="plan.html#enquire">Ask About a Date</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-head">
+    <div class="wrap">
+      <p class="eyebrow">Plan Your Event</p>
+      <h1>Plan your event</h1>
+      <p class="lede">How an enquiry works, what we will ask you, and the rules for catering, rental and cleanup.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2>From enquiry to event</h2>
+      </header>
+      <ol class="steps">
+        <li><span class="numeral">I</span><h3>Send an enquiry</h3><p>Tell us your preferred date, your event and your guest count using the form below.</p></li>
+        <li><span class="numeral">II</span><h3>The office replies</h3><p>We check the date, including Shabbat and Yom Tov timing, and send you a quote.</p></li>
+        <li><span class="numeral">III</span><h3>Confirm your date</h3><p>Your date is reserved once the rental agreement is signed and the reservation payment is received.</p></li>
+        <li><span class="numeral">IV</span><h3>Celebrate</h3><p>We send building access details before the event. Afterwards, the hall is inspected and your deposit returned.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section tinted">
+    <div class="wrap">
+      <div class="info-grid">
+        <div>
+          <p class="eyebrow">What to tell us</p>
+          <h2>What we'll ask you</h2>
+          <ul class="ticks">
+            <li>Your preferred date and the hours you need, including setup and cleanup</li>
+            <li>The type of event</li>
+            <li>Your expected guest count</li>
+            <li>Your food and kitchen needs</li>
+            <li>Any equipment or special arrangements, such as music or outside vendors</li>
+          </ul>
+          <p class="small">The form below asks for the essentials. The office will follow up on the rest.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Good to know</p>
+          <h2>Before you ask</h2>
+          <div class="notice"><p>A date is not reserved until the office confirms it, the rental agreement is signed and the reservation payment is received.</p></div>
+          <div class="notice"><p>Shabbat and Yom Tov availability is confirmed by the office. Please don't rely on the calendar alone for those days.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tinted" id="enquire">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">Ask about a date</p>
+        <h2>Find your date</h2>
+        <p class="lede">The calendar shows each day's Hebrew date, candle lighting, parashah and when Shabbat ends. Select a day to add it to your enquiry.</p>
+      </header>
+      <div class="cal">
+        <div class="cal-bar">
+          <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">&lsaquo;</button>
+          <div class="cal-title">
+            <span class="cal-month" id="cal-month"></span>
+            <span class="cal-hebrew" id="cal-hebrew"></span>
+          </div>
+          <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">&rsaquo;</button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <ul class="cal-legend">
+          <li><span class="sw sw-open"></span>Open</li>
+          <li><span class="sw sw-limited"></span>Limited hours (Saturday nights, the day before Yom Tov)</li>
+          <li><span class="sw sw-closed"></span>Closed (Shabbat and Yom Tov)</li>
+          <li><span class="sw sw-booked"></span>Reserved</li>
+        </ul>
+        <p class="small">The calendar is a guide. Candle lighting and Shabbat times are calculated for Oakland. Shabbat and Yom Tov availability is confirmed by the office.</p>
+      </div>
+
+      <div class="enquire-wrap">
+        <div>
+          <h3>Send an enquiry</h3>
+          <p class="small">The office will reply with availability and a quote. Prefer to talk? Call <a href="tel:+15105456770">510.545.6770</a>.</p>
+          <div class="notice"><p>Sending an enquiry does not reserve the date. Your date is reserved only when the office confirms it.</p></div>
+        </div>
+        <form class="enquiry" id="enquiry" novalidate>
+          <div class="field">
+            <label for="names">Name</label>
+            <input id="names" name="names" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="type">Event type</label>
+            <select id="type" name="type">
+              <option>Wedding</option>
+              <option>Bar or Bas Mitzvah</option>
+              <option>Bris</option>
+              <option>Sheva Brachos</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">Preferred date</label>
+            <input id="date" name="date" type="date">
+          </div>
+          <div class="field">
+            <label for="guests">Guest count</label>
+            <input id="guests" name="guests" type="number" min="1" inputmode="numeric">
+          </div>
+          <p class="date-note full" id="date-note" aria-live="polite"></p>
+          <div class="field full">
+            <button class="btn btn-dark" type="submit">Send Enquiry</button>
+          </div>
+          <p class="form-note">This opens an email to the office with your details. Your date isn't reserved until the office confirms it.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="rates">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">Rates</p>
+        <h2>Rental rates</h2>
+        <p class="lede">All rentals are subject to availability and approval by Chabad of Oakland.</p>
+      </header>
+      <div class="rate-cards">
+        <article class="rate">
+          <h3>Weekday Event</h3>
+          <p class="price">$650</p>
+          <p class="rate-desc">Up to 5 hours, Monday to Thursday. For family celebrations, meetings, community gatherings and dinners.</p>
+          <p class="rate-extra">Additional time: $125 per hour</p>
+        </article>
+        <article class="rate">
+          <h3>Weekend Event</h3>
+          <p class="price">$850</p>
+          <p class="rate-desc">Up to 5 hours during approved weekend times. For birthdays, brit milah, baby namings, family celebrations and community dinners.</p>
+          <p class="rate-extra">Additional time: $175 per hour</p>
+        </article>
+        <article class="rate">
+          <h3>Extended Event</h3>
+          <p class="price">$1,200</p>
+          <p class="rate-desc">Up to 8 hours for larger celebrations, organizational events and private functions.</p>
+          <p class="rate-extra">Additional time: $175 per hour</p>
+        </article>
+      </div>
+      <p class="rate-note">Your reserved period includes setup, your event and cleanup. Any additional fees are shown in your quote before you sign.</p>
+    </div>
+  </section>
+
+  <section class="section" id="rules">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">Rental rules</p>
+        <h2>Catering, rental and cleanup</h2>
+      </header>
+
+      <div class="policy-grid">
+        <div class="policy">
+          <h3>Catering and kitchen</h3>
+          <p>The hall keeps kosher standards. All food brought into the hall must meet Chabad of Oakland's requirements, and all caterers and food arrangements are approved in advance.</p>
+          <p>Kitchen use is limited to approved refrigeration, reheating and warming. Full food preparation, unapproved cooking and outside cooking appliances are not permitted without written permission. Please leave the kitchen clean.</p>
+        </div>
+        <div class="policy">
+          <h3>Optional extras</h3>
+          <dl class="fees">
+            <div><dt>Standard kitchen access (refrigerator and warming equipment)</dt><dd>$250</dd></div>
+            <div><dt>Extended kitchen access or additional equipment</dt><dd>$250&ndash;$350</dd></div>
+            <div><dt>Sound system and microphone, if available</dt><dd>$35</dd></div>
+            <div><dt>Additional approved hours</dt><dd>$125&ndash;$175 per hour</dd></div>
+            <div><dt>Excessive cleaning</dt><dd>$150 minimum, or actual cost if higher</dd></div>
+            <div><dt>Lost keys or access devices</dt><dd>Actual replacement cost</dd></div>
+            <div><dt>Damaged or missing equipment</dt><dd>Actual repair or replacement cost</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="policy-grid">
+        <div class="policy">
+          <h3>Deposit and payment</h3>
+          <ul class="ticks">
+            <li>A 50% reservation payment secures your date.</li>
+            <li>The remaining balance is due 14 days before the event.</li>
+            <li>For bookings made within 14 days of the event, the full rental fee and deposit are due at booking.</li>
+            <li>A $500 refundable security deposit is required. Any deductions are itemized, and the balance is returned within 7 to 10 business days after the event and inspection.</li>
+          </ul>
+        </div>
+        <div class="policy">
+          <h3>Cancellation</h3>
+          <ul class="ticks">
+            <li>More than 30 days before: the reservation payment is kept, and other rental payments are refunded.</li>
+            <li>15 to 30 days before: 50% of the total rental fee is kept.</li>
+            <li>14 days or fewer before: the full rental fee is due.</li>
+            <li>If Chabad of Oakland cancels, rental payments are refunded.</li>
+          </ul>
+          <p class="small">In exceptional circumstances, a date transfer or partial refund may be considered.</p>
+        </div>
+      </div>
+
+      <div class="policy-grid">
+        <div class="policy">
+          <h3>Setup and cleanup</h3>
+          <p>You are responsible for all setup and cleanup, and both happen within your reserved period.</p>
+          <h4>Before the event</h4>
+          <ul class="ticks">
+            <li>Arrange the tables and chairs as needed</li>
+            <li>Bring all decorations, linens and serving supplies</li>
+            <li>Keep exits, hallways and accessible routes clear</li>
+          </ul>
+          <h4>After the event</h4>
+          <ul class="ticks">
+            <li>Return tables and chairs to their original layout</li>
+            <li>Remove all food, drinks, decorations and belongings</li>
+            <li>Bag trash and use the designated bins</li>
+            <li>Wipe tables and clean any kitchen equipment and surfaces used</li>
+          </ul>
+          <p class="small">Cleanup must be finished before your reserved period ends. Extra time must be approved and paid for in advance.</p>
+        </div>
+        <div class="policy">
+          <h3>Decorations and house rules</h3>
+          <p>Signs, posters and banners may not be taped, pinned, nailed or stuck to the walls. Use freestanding displays or approved stands.</p>
+          <ul class="ticks">
+            <li>No smoking or vaping inside the hall</li>
+            <li>No open flames, including candles</li>
+            <li>No glitter or confetti</li>
+            <li>No nails, screws or strong adhesives on walls</li>
+            <li>Amplified music, alcohol and outside vendors must be disclosed and approved in advance</li>
+          </ul>
+          <h4>Community pricing</h4>
+          <p>Reduced rates may be considered for Chabad-sponsored programs, recurring community programs, families experiencing financial hardship and other approved community events. Discounts must be agreed before the rental agreement is finalized.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-name">The Zadik Hall</p>
+    <p>3014 Lakeshore Avenue, Oakland, CA 94610</p>
+    <p><a href="tel:+15105456770">510.545.6770</a> · <a href="mailto:info@jewishoakland.org">info@jewishoakland.org</a></p>
+    <p>© <span id="year">2026</span> The Zadik Hall</p>
+  </div>
+</footer>
+
+<script src="js/booking-rules.js"></script>
+<script src="js/hebrew-calendar.js"></script>
+<script src="js/availability.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

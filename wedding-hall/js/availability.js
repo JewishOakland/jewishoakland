@@ -1,9 +1,9 @@
-/* The Zadik Hall: availability calendar and reservation request form.
+/* The Zadik Hall: availability calendar and enquiry form (Plan Your Event page).
    Needs js/booking-rules.js and js/hebrew-calendar.js to be loaded first.
 
-   Hebrew dates, holidays, parashah and Shabbat times are calculated by js/hebrew-calendar.js.
-   Reserved dates come from loadReservations(), which is not connected to a shared store yet,
-   so no date is marked reserved until it is. */
+   The calendar is a guide. Shabbat and Yom Tov availability is confirmed by the office, and
+   no date is reserved until the office confirms it. Reserved dates come from loadReservations(),
+   which is not connected to a shared store yet, so no date is marked reserved until it is. */
 (function () {
   'use strict';
 
@@ -16,7 +16,6 @@
   var todayKey = keyOf(now);
   var view = { year: now.getFullYear(), month: now.getMonth() };
   var reservations = [];     // [{ date, start, end }] in minutes
-  var submitAllowed = false;
 
   function $(id) { return document.getElementById(id); }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
@@ -27,7 +26,6 @@
     if (text != null) node.textContent = text;
     return node;
   }
-  function money(n) { return '$' + n.toLocaleString('en-US'); }
 
   // Live reservations. Connect this to the venue's booking store, returning
   // [{ date: 'YYYY-MM-DD', start: minutes, end: minutes }] for the range. Until then, nothing is reserved.
@@ -38,23 +36,12 @@
   function ensureReservations() {
     var first = new Date(view.year, view.month, 1);
     var last = new Date(view.year, view.month + 1, 0);
-    return loadReservations(keyOf(new Date(first.getTime() - 86400000)), keyOf(new Date(last.getTime() + 86400000)))
-      .then(function (list) { reservations = list || []; });
+    return loadReservations(keyOf(first), keyOf(last)).then(function (list) { reservations = list || []; });
   }
 
-  // Bookings made within 14 days of the event owe the full fee and deposit up front.
-  // Otherwise 50% now and the balance 14 days before the event.
-  function paymentNote(date, total) {
-    var terms = R.reservationTerms(total, date);
-    var daysAway = R.dayNumber(date) - R.dayNumber(todayKey);
-    if (daysAway <= 14) {
-      return 'Booking within 14 days of the event: the full rental fee of ' + money(total) +
-        ' and the ' + money(terms.securityDeposit) + ' refundable security deposit are due when you book.';
-    }
-    var due = new Date(terms.balanceDue + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    return 'Reservation payment (50%): ' + money(terms.reservationPayment) +
-      '. Refundable security deposit: ' + money(terms.securityDeposit) +
-      '. Balance due by ' + due + '.';
+  // Days whose availability depends on Shabbat or Yom Tov, which the office confirms
+  function askOffice(info) {
+    return info.weekday === 6 || info.holidayMajor || info.nextHolidayMajor;
   }
 
   function dayCell(year, month, d) {
@@ -79,13 +66,12 @@
     if (selectable) {
       cell.type = 'button';
       cell.setAttribute('aria-label', date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) +
-        (w.note ? '. ' + w.note : ''));
+        (w.note ? '. ' + w.note : '') + (askOffice(info) ? '. Check with the office' : ''));
       cell.addEventListener('click', function () { choose(key); });
     }
 
     cell.appendChild(el('span', 'cal-num', String(d)));
-    var heb = d === 1 ? info.hebrew.month + ' ' + info.hebrewNumeral : info.hebrewNumeral;
-    cell.appendChild(el('span', 'cal-heb', heb));
+    cell.appendChild(el('span', 'cal-heb', d === 1 ? info.hebrew.month + ' ' + info.hebrewNumeral : info.hebrewNumeral));
     if (info.holiday && !info.holidayMajor) cell.appendChild(el('span', 'cal-note', info.holiday));
     if (info.weekday === 6 && info.parsha) cell.appendChild(el('span', 'cal-note cal-parsha', 'Parashat ' + info.parsha));
     if ((info.weekday === 5 || info.nextHolidayMajor) && !info.holidayMajor && info.weekday !== 6) {
@@ -94,6 +80,7 @@
     if (info.weekday === 6 && !info.holidayMajor) cell.appendChild(el('span', 'cal-note', 'Shabbat ends ' + info.havdalahText));
     if (booked) cell.appendChild(el('span', 'cal-note cal-status', 'Reserved'));
     else if (w.note) cell.appendChild(el('span', 'cal-note cal-status', w.note));
+    if (!booked && !past && askOffice(info)) cell.appendChild(el('span', 'cal-note', 'Check with the office'));
     return cell;
   }
 
@@ -121,137 +108,57 @@
     var next = new Date(view.year, view.month + step, 1);
     view.year = next.getFullYear();
     view.month = next.getMonth();
-    refreshMonth();
+    render();
+    ensureReservations().then(render);
   }
 
-  function refreshMonth() {
-    render();
-    ensureReservations().then(function () { render(); refresh(); });
+  // A short note under the date field about the chosen day
+  function describeDate() {
+    var date = $('date').value;
+    var note = $('date-note');
+    if (!date) { note.textContent = ''; return; }
+    var info = H.dayInfo(date);
+    var w = R.windowFor(info);
+    var parts = [];
+    if (w.note) parts.push(w.note + '.');
+    if (askOffice(info)) parts.push('Shabbat and Yom Tov availability is confirmed by the office.');
+    note.textContent = parts.join(' ');
   }
 
   function choose(key) {
     $('date').value = key;
-    fitToWindow(R.windowFor(H.dayInfo(key)));
     var d = new Date(key + 'T12:00:00');
     view.year = d.getFullYear();
     view.month = d.getMonth();
     render();
-    refresh();
+    describeDate();
     $('enquire').scrollIntoView({ behavior: 'smooth' });
-  }
-
-  // Start and length choices
-  function fillTimes() {
-    var start = $('start');
-    for (var t = R.CONFIG.earliestStart; t + R.CONFIG.minHours * 60 <= R.CONFIG.latestEnd; t += R.CONFIG.slotMinutes) {
-      start.appendChild(new Option(R.formatTime(t), String(t)));
-    }
-    start.value = String(9 * 60);
-    var hours = $('hours');
-    for (var h = R.CONFIG.minHours; h <= 12; h++) {
-      hours.appendChild(new Option(h + (h === 1 ? ' hour' : ' hours'), String(h)));
-    }
-    hours.value = '5';
-  }
-
-  function fillPackages(keys) {
-    var select = $('package');
-    var previous = select.value;
-    select.textContent = '';
-    keys.forEach(function (k) { select.appendChild(new Option(R.CONFIG.packages[k].label, k)); });
-    select.value = keys.indexOf(previous) !== -1 ? previous : keys[0];
-  }
-
-  // Moves the chosen start time and length inside the day's opening hours, if they fall outside it
-  function fitToWindow(w) {
-    if (w.closed) return;
-    var start = $('start'), hours = $('hours');
-    var startMin = Number(start.value), len = Number(hours.value);
-    if (startMin < w.earliest) startMin = w.earliest;
-    if (startMin + len * 60 > w.latest) {
-      // Keep the length and start earlier; shorten only if the day is too short for it
-      startMin = Math.max(w.earliest, w.latest - len * 60);
-      if (startMin + len * 60 > w.latest) len = Math.max(R.CONFIG.minHours, Math.floor((w.latest - startMin) / 60));
-    }
-    if (start.querySelector('option[value="' + startMin + '"]')) start.value = String(startMin);
-    hours.value = String(len);
-  }
-
-  function refresh() {
-    var date = $('date').value;
-    var box = $('price');
-    var submit = $('enquiry').querySelector('button[type="submit"]');
-    box.textContent = '';
-    submitAllowed = false;
-
-    if (!date) {
-      box.appendChild(el('p', 'price-hint', 'Choose a date to see the times available and the price.'));
-      submit.disabled = false;
-      return;
-    }
-
-    var startMin = Number($('start').value);
-    var endMin = startMin + Number($('hours').value) * 60;
-    var info = H.dayInfo(date);
-    var w = R.windowFor(info);
-    fillPackages(R.optionsFor(date).packages);
-
-    var check = R.validateBooking({ date: date, start: startMin, end: endMin }, reservations, w);
-    if (!check.ok) {
-      box.appendChild(el('p', 'price-error', check.message));
-      submit.disabled = true;
-      return;
-    }
-
-    var price = R.priceFor($('package').value, startMin, endMin);
-
-    box.appendChild(el('p', 'price-title', price.label + ' · ' + R.formatTime(startMin) + ' to ' + R.formatTime(endMin)));
-    var lines = [['Base package (' + price.includedHours + ' hours)', money(price.base)]];
-    if (price.extraHours > 0) {
-      lines.push([price.extraHours + (price.extraHours === 1 ? ' additional hour' : ' additional hours') + ' at ' + money(price.extraRate) + ' each', money(price.extraCost)]);
-    }
-    lines.push(['Total', money(price.total)]);
-    lines.forEach(function (line, i) {
-      var row = el('div', 'price-row' + (i === lines.length - 1 ? ' is-total' : ''));
-      row.appendChild(el('span', null, line[0]));
-      row.appendChild(el('span', null, line[1]));
-      box.appendChild(row);
-    });
-    box.appendChild(el('p', 'price-note', paymentNote(date, price.total)));
-    if (w.note) box.appendChild(el('p', 'price-note', w.note + '.'));
-    submitAllowed = true;
-    submit.disabled = false;
+    $('names').focus({ preventScroll: true });
   }
 
   function onSubmit(e) {
     e.preventDefault();
-    refresh();
-    if (!submitAllowed) return;
-
-    var data = new FormData(e.target);
+    var form = e.target;
+    if (!form.reportValidity()) return;
+    var data = new FormData(form);
     var date = data.get('date');
-    var startMin = Number(data.get('start'));
-    var endMin = startMin + Number(data.get('hours')) * 60;
-    var price = R.priceFor(data.get('package'), startMin, endMin);
-    var info = H.dayInfo(date);
-
+    var dateLine = 'Preferred date: flexible';
+    if (date) {
+      var info = H.dayInfo(date);
+      var pretty = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      dateLine = 'Preferred date: ' + pretty + ' (' + info.hebrewNumeral + ' ' + info.hebrew.month + ' ' + info.hebrew.year + ')';
+    }
     var body = [
-      'Names: ' + data.get('names'),
+      'Name: ' + data.get('names'),
       'Email: ' + data.get('email'),
       'Phone: ' + (data.get('phone') || '-'),
-      'Celebration: ' + data.get('celebration'),
-      'Date: ' + date + ' (' + info.hebrewNumeral + ' ' + info.hebrew.month + ' ' + info.hebrew.year + ')',
-      'Time: ' + R.formatTime(startMin) + ' to ' + R.formatTime(endMin) + ' (' + price.hours + ' hours)',
-      'Package: ' + price.label + ' ' + money(price.total),
-      paymentNote(date, price.total),
-      'Expected guests: ' + (data.get('guests') || '-'),
-      'Would like to start with: ' + data.get('visit'),
+      'Event type: ' + data.get('type'),
+      dateLine,
+      'Guest count: ' + (data.get('guests') || '-'),
       '',
-      'Please confirm this date and time. Nothing is booked until it is confirmed.',
-      '',
-      data.get('message') || ''
+      'Please let me know if this date is available. I understand the date is not reserved until the office confirms it.'
     ].join('\n');
-    var subject = 'Booking request: ' + data.get('celebration') + ', ' + date + ' (' + data.get('names') + ')';
+    var subject = 'Hall enquiry: ' + data.get('type') + (date ? ', ' + date : '') + ' (' + data.get('names') + ')';
     window.location.href = 'mailto:' + ENQUIRY_EMAIL +
       '?subject=' + encodeURIComponent(subject) +
       '&body=' + encodeURIComponent(body);
@@ -259,20 +166,20 @@
 
   function init() {
     $('date').min = todayKey;
-    fillTimes();
     $('cal-prev').addEventListener('click', function () { moveMonth(-1); });
     $('cal-next').addEventListener('click', function () { moveMonth(1); });
-    ['date', 'start', 'hours', 'package'].forEach(function (id) {
-      $(id).addEventListener('change', function () {
-        if (id === 'date') {
-          if ($('date').value) fitToWindow(R.windowFor(H.dayInfo($('date').value)));
-          render();
-        }
-        refresh();
-      });
+    $('date').addEventListener('change', function () {
+      if ($('date').value) {
+        var d = new Date($('date').value + 'T12:00:00');
+        view.year = d.getFullYear();
+        view.month = d.getMonth();
+      }
+      render();
+      describeDate();
     });
     $('enquiry').addEventListener('submit', onSubmit);
-    refreshMonth();
+    render();
+    ensureReservations().then(render);
   }
 
   init();
