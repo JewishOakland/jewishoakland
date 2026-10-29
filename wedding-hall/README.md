@@ -35,7 +35,7 @@ The header and footer are repeated in each page. If you change one, change all s
 
 ## Before launch
 
-1. **Accessibility, parking and entrance.** The Space and Contact pages ask people to call the office about these, because the details weren't available. Add the step-free route, accessible restroom, parking and entrance information when you have it.
+1. **Accessibility and entrance.** The Space and Contact pages ask people to call the office about these, because the details weren't available. Add the step-free route, accessible restroom and entrance information when you have it. Parking (street parking and the lot under I-580) is on both pages.
 2. **Photos.** The home photo (`hall-08.jpg`) has one person standing in the background near the buffet. Replace or crop it if you prefer an empty room.
 3. **Copy.** Read every page against the rental policy, especially the summaries on Plan Your Event.
 4. **Enquiry inbox.** The form opens an email to `ENQUIRY_EMAIL` at the top of `js/availability.js`. The page does not store or send anything itself. For a form that saves enquiries, connect a form service.
