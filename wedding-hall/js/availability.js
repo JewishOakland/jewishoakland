@@ -156,7 +156,10 @@
       dateLine,
       'Guest count: ' + (data.get('guests') || '-'),
       '',
-      'Please let me know if this date is available. I understand the date is not reserved until the office confirms it.'
+      'I confirm I have read and understood:',
+      data.getAll('agree').map(function (item) { return '- ' + item; }).join('\n'),
+      '',
+      'Please let me know if this date is available.'
     ].join('\n');
     var subject = 'Hall enquiry: ' + data.get('type') + (date ? ', ' + date : '') + ' (' + data.get('names') + ')';
     window.location.href = 'mailto:' + ENQUIRY_EMAIL +

@@ -386,6 +386,14 @@ button.cal-day:focus-visible { outline: 1px solid var(--champagne); outline-offs
 .form-note { grid-column: 1 / -1; font-size: .88rem; color: var(--muted); margin: 0; }
 .date-note { grid-column: 1 / -1; font-size: .85rem; color: #8a6a2c; margin: 0; min-height: 1.2em; }
 
+.agree { grid-column: 1 / -1; border: 0; padding: 20px 0 0; margin: 0; border-top: 1px solid var(--line); }
+.agree legend { padding: 0; font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.agree > p { margin: 8px 0 6px; }
+.check { display: flex; gap: 12px; align-items: flex-start; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: .92rem; line-height: 1.55; cursor: pointer; }
+.check:last-child { border-bottom: 0; }
+.check input { flex: none; width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--espresso); cursor: pointer; }
+.check a { color: var(--espresso); text-underline-offset: 3px; }
+
 /* Contact */
 .contact-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-bottom: 48px; }
 .contact-card { background: var(--white); border: 1px solid var(--line); padding: 34px 28px; text-align: center; }

@@ -51,7 +51,7 @@
         <h2>From enquiry to event</h2>
       </header>
       <ol class="steps">
-        <li><span class="numeral">I</span><h3>Send an enquiry</h3><p>Tell us your preferred date, your event and your guest count using the form below.</p></li>
+        <li><span class="numeral">I</span><h3>Send an enquiry</h3><p>Tell us your preferred date, your event and your guest count, and confirm you have read the rules, using the form below.</p></li>
         <li><span class="numeral">II</span><h3>The office replies</h3><p>We check the date, including Shabbat and Yom Tov timing, and send you a quote.</p></li>
         <li><span class="numeral">III</span><h3>Confirm your date</h3><p>Your date is reserved once the rental agreement is signed and the reservation payment is received.</p></li>
         <li><span class="numeral">IV</span><h3>Celebrate</h3><p>We send building access details before the event. Afterwards, the hall is inspected and your deposit returned.</p></li>
@@ -148,6 +148,15 @@
             <input id="guests" name="guests" type="number" min="1" inputmode="numeric">
           </div>
           <p class="date-note full" id="date-note" aria-live="polite"></p>
+          <fieldset class="agree">
+            <legend>Before you send</legend>
+            <p class="small">Please read the <a href="#rates">rates</a> and <a href="#rules">rental rules</a> on this page, then tick each box. All five are needed to send your enquiry.</p>
+            <label class="check"><input type="checkbox" name="agree" value="Rates, optional fees, the $500 refundable security deposit and the 50% reservation payment" required><span>I have read the <a href="#rates">rates and optional fees</a>, and I understand the <a href="#deposit">$500 refundable security deposit and 50% reservation payment</a>.</span></label>
+            <label class="check"><input type="checkbox" name="agree" value="The cancellation policy" required><span>I have read the <a href="#cancellation">cancellation policy</a>.</span></label>
+            <label class="check"><input type="checkbox" name="agree" value="The catering and kitchen rules, including kosher standards" required><span>I have read the <a href="#catering">catering and kitchen rules</a>, including the kosher standards.</span></label>
+            <label class="check"><input type="checkbox" name="agree" value="The setup, cleanup and house rules" required><span>I have read the <a href="#cleanup">setup, cleanup</a> and <a href="#house-rules">house rules</a>.</span></label>
+            <label class="check"><input type="checkbox" name="agree" value="The date is not reserved until the office confirms it" required><span>I understand my date is not reserved until the office confirms it, the rental agreement is signed and the reservation payment is received.</span></label>
+          </fieldset>
           <div class="field full">
             <button class="btn btn-dark" type="submit">Send Enquiry</button>
           </div>
@@ -196,7 +205,7 @@
       </header>
 
       <div class="policy-grid">
-        <div class="policy">
+        <div class="policy" id="catering">
           <h3>Catering and kitchen</h3>
           <p>The hall keeps kosher standards. All food brought into the hall must meet Chabad of Oakland's requirements, and all caterers and food arrangements are approved in advance.</p>
           <p>Kitchen use is limited to approved refrigeration, reheating and warming. Full food preparation, unapproved cooking and outside cooking appliances are not permitted without written permission. Please leave the kitchen clean.</p>
@@ -216,7 +225,7 @@
       </div>
 
       <div class="policy-grid">
-        <div class="policy">
+        <div class="policy" id="deposit">
           <h3>Deposit and payment</h3>
           <ul class="ticks">
             <li>A 50% reservation payment secures your date.</li>
@@ -225,7 +234,7 @@
             <li>A $500 refundable security deposit is required. Any deductions are itemized, and the balance is returned within 7 to 10 business days after the event and inspection.</li>
           </ul>
         </div>
-        <div class="policy">
+        <div class="policy" id="cancellation">
           <h3>Cancellation</h3>
           <ul class="ticks">
             <li>More than 30 days before: the reservation payment is kept, and other rental payments are refunded.</li>
@@ -238,7 +247,7 @@
       </div>
 
       <div class="policy-grid">
-        <div class="policy">
+        <div class="policy" id="cleanup">
           <h3>Setup and cleanup</h3>
           <p>You are responsible for all setup and cleanup, and both happen within your reserved period.</p>
           <h4>Before the event</h4>
@@ -256,7 +265,7 @@
           </ul>
           <p class="small">Cleanup must be finished before your reserved period ends. Extra time must be approved and paid for in advance.</p>
         </div>
-        <div class="policy">
+        <div class="policy" id="house-rules">
           <h3>Decorations and house rules</h3>
           <p>Signs, posters and banners may not be taped, pinned, nailed or stuck to the walls. Use freestanding displays or approved stands.</p>
           <ul class="ticks">
