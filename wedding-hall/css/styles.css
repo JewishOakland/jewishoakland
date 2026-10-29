@@ -411,7 +411,7 @@ button.cal-day:focus-visible { outline: 1px solid var(--champagne); outline-offs
 .site-footer a:hover { color: var(--champagne-soft); }
 
 /* Responsive */
-@media (max-width: 1080px) {
+@media (max-width: 1160px) {
   .menu-toggle { display: block; }
   .nav {
     display: none;

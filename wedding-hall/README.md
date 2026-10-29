@@ -1,6 +1,6 @@
 # The Zadik Hall: venue website
 
-A standalone five-page website for The Zadik Hall. It is plain HTML, CSS and JavaScript, with no framework and no build step, and it has no connection to the Chabad Oakland site's design.
+A standalone six-page website for The Zadik Hall. It is plain HTML, CSS and JavaScript, with no framework and no build step, and it has no connection to the Chabad Oakland site's design.
 
 ## Open it
 
@@ -8,12 +8,13 @@ Open `index.html` in a browser, or upload the whole `wedding-hall/` folder to an
 
 ## Pages
 
-Every page has the same menu (Home, The Space, Gallery, Plan Your Event, Contact), an "Ask About a Date" button that goes to the enquiry form, and a small footer. On phones the menu collapses behind a Menu button.
+Every page has the same menu (Home, The Space, Celebrations, Gallery, Plan Your Event, Contact), an "Ask About a Date" button that goes to the enquiry form, and a small footer. On phones the menu collapses behind a Menu button.
 
 | Page | What it has |
 | --- | --- |
 | `index.html` | Home: one hall photo, a short introduction, "Explore the Space" and "Ask About a Date" buttons, and a three-photo preview |
-| `space.html` | The Space: the room, layout and capacity, what's included, facilities, accessibility, parking and arrival, and the celebrations hosted |
+| `space.html` | The Space: the room, layout and capacity, what's included, facilities, accessibility, and parking and arrival |
+| `celebrations.html` | Celebrations: weddings, Bar and Bas Mitzvos, Bris and Sheva Brachos, each with a photo and an "Ask about a date" link that picks the event type in the form |
 | `gallery.html` | Gallery: photos grouped as the room, dinner setups and details, with captions and a photo viewer |
 | `plan.html` | Plan Your Event: how an enquiry works, what to tell the office, the calendar, the enquiry form, rates, and catering, rental and cleanup rules |
 | `contact.html` | Contact: phone, email, address, map and directions |
@@ -30,7 +31,7 @@ Every page has the same menu (Home, The Space, Gallery, Plan Your Event, Contact
 | `tests/` | Tests for the calendar and the rules. Run with `node --test tests/*.test.js` |
 | `images/` | The hall's photographs, resized for the web |
 
-The header and footer are repeated in each page. If you change one, change all five.
+The header and footer are repeated in each page. If you change one, change all six.
 
 ## Before launch
 

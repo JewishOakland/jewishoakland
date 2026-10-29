@@ -167,8 +167,19 @@
       '&body=' + encodeURIComponent(body);
   }
 
+  // A link such as plan.html?type=Bris#enquire chooses the event type in the form
+  function presetType() {
+    var wanted = new URLSearchParams(window.location.search).get('type');
+    if (!wanted) return;
+    var select = $('type');
+    for (var i = 0; i < select.options.length; i++) {
+      if (select.options[i].value === wanted) select.value = wanted;
+    }
+  }
+
   function init() {
     $('date').min = todayKey;
+    presetType();
     $('cal-prev').addEventListener('click', function () { moveMonth(-1); });
     $('cal-next').addEventListener('click', function () { moveMonth(1); });
     $('date').addEventListener('change', function () {
