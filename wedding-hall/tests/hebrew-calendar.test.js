@@ -95,3 +95,14 @@ test('Shabbat times are plausible for Oakland', () => {
   assert.ok(dec.candles > 16 * 60 + 20 && dec.candles < 16 * 60 + 40, `December candles ${dec.candlesText}`);
   assert.ok(jun.candles > 20 * 60 && jun.candles < 20 * 60 + 30, `June candles ${jun.candlesText}`);
 });
+
+test('day information feeds the opening rules correctly', () => {
+  const R = require('../js/booking-rules.js');
+  assert.equal(R.windowFor(H.dayInfo('2026-09-12')).closed, true);               // Rosh Hashanah
+  assert.equal(R.windowFor(H.dayInfo('2026-09-20')).latest < 19 * 60, true);     // Erev Yom Kippur
+  assert.equal(H.dayInfo('2026-09-20').nextHoliday, 'Yom Kippur');
+  assert.equal(R.windowFor(H.dayInfo('2026-06-20')).closed, true);               // summer Saturday: Shabbat ends too late
+  assert.equal(R.windowFor(H.dayInfo('2026-11-07')).earliest, 18 * 60);          // November Saturday: 6 PM
+  assert.equal(R.windowFor(H.dayInfo('2026-09-28')).closed, false);              // Chol HaMoed Sukkot is open
+  assert.equal(H.dayInfo('2026-09-28').holiday, 'Sukkot (Chol HaMoed)');
+});

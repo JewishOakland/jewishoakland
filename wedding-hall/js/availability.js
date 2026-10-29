@@ -61,36 +61,39 @@
     var date = new Date(year, month, d);
     var key = keyOf(date);
     var info = H.dayInfo(key);
+    var w = R.windowFor(info);
     var booked = reservations.some(function (r) { return r.date === key; });
     var past = key < todayKey;
-    var needsApproval = info.weekday === 6 || info.holidayMajor;
+    var limited = !w.closed && (w.earliest > R.CONFIG.earliestStart || w.latest < R.CONFIG.latestEnd);
 
     var cls = 'cal-day';
     if (past) cls += ' is-past';
     if (booked) cls += ' is-booked';
-    else if (needsApproval) cls += ' is-approval';
+    else if (w.closed) cls += ' is-closed';
+    else if (limited) cls += ' is-limited';
     else if (!past) cls += ' is-open';
     if (key === $('date').value) cls += ' is-selected';
 
-    var selectable = !past && !booked;
+    var selectable = !past && !booked && !w.closed;
     var cell = el(selectable ? 'button' : 'div', cls);
     if (selectable) {
       cell.type = 'button';
-      cell.setAttribute('aria-label', date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }));
+      cell.setAttribute('aria-label', date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) +
+        (w.note ? '. ' + w.note : ''));
       cell.addEventListener('click', function () { choose(key); });
     }
 
     cell.appendChild(el('span', 'cal-num', String(d)));
     var heb = d === 1 ? info.hebrew.month + ' ' + info.hebrewNumeral : info.hebrewNumeral;
     cell.appendChild(el('span', 'cal-heb', heb));
-    if (booked) cell.appendChild(el('span', 'cal-note', 'Reserved'));
-    if (info.holiday && !booked) cell.appendChild(el('span', 'cal-note', info.holiday));
-    if (info.weekday === 5 && info.candlesText) cell.appendChild(el('span', 'cal-note', 'Candles ' + info.candlesText));
-    if (info.weekday === 6) {
-      if (info.parsha) cell.appendChild(el('span', 'cal-note cal-parsha', 'Parashat ' + info.parsha));
-      if (info.havdalahText) cell.appendChild(el('span', 'cal-note', 'Ends ' + info.havdalahText));
-      if (!booked) cell.appendChild(el('span', 'cal-note cal-approval-note', 'Approval needed'));
+    if (info.holiday && !info.holidayMajor) cell.appendChild(el('span', 'cal-note', info.holiday));
+    if (info.weekday === 6 && info.parsha) cell.appendChild(el('span', 'cal-note cal-parsha', 'Parashat ' + info.parsha));
+    if ((info.weekday === 5 || info.nextHolidayMajor) && !info.holidayMajor && info.weekday !== 6) {
+      cell.appendChild(el('span', 'cal-note', 'Candles ' + info.candlesText));
     }
+    if (info.weekday === 6 && !info.holidayMajor) cell.appendChild(el('span', 'cal-note', 'Shabbat ends ' + info.havdalahText));
+    if (booked) cell.appendChild(el('span', 'cal-note cal-status', 'Reserved'));
+    else if (w.note) cell.appendChild(el('span', 'cal-note cal-status', w.note));
     return cell;
   }
 
@@ -128,6 +131,7 @@
 
   function choose(key) {
     $('date').value = key;
+    fitToWindow(R.windowFor(H.dayInfo(key)));
     var d = new Date(key + 'T12:00:00');
     view.year = d.getFullYear();
     view.month = d.getMonth();
@@ -158,10 +162,19 @@
     select.value = keys.indexOf(previous) !== -1 ? previous : keys[0];
   }
 
-  // A Friday event that runs past candle lighting needs approval
-  function overlapsShabbat(date, endMin) {
-    var info = H.dayInfo(date);
-    return info.weekday === 5 && info.candles != null && endMin > info.candles;
+  // Moves the chosen start time and length inside the day's opening hours, if they fall outside it
+  function fitToWindow(w) {
+    if (w.closed) return;
+    var start = $('start'), hours = $('hours');
+    var startMin = Number(start.value), len = Number(hours.value);
+    if (startMin < w.earliest) startMin = w.earliest;
+    if (startMin + len * 60 > w.latest) {
+      // Keep the length and start earlier; shorten only if the day is too short for it
+      startMin = Math.max(w.earliest, w.latest - len * 60);
+      if (startMin + len * 60 > w.latest) len = Math.max(R.CONFIG.minHours, Math.floor((w.latest - startMin) / 60));
+    }
+    if (start.querySelector('option[value="' + startMin + '"]')) start.value = String(startMin);
+    hours.value = String(len);
   }
 
   function refresh() {
@@ -180,10 +193,10 @@
     var startMin = Number($('start').value);
     var endMin = startMin + Number($('hours').value) * 60;
     var info = H.dayInfo(date);
-    var opts = R.optionsFor(date, { holiday: info.holidayMajor, shabbatOverlap: overlapsShabbat(date, endMin) });
-    fillPackages(opts.packages);
+    var w = R.windowFor(info);
+    fillPackages(R.optionsFor(date).packages);
 
-    var check = R.validateBooking({ date: date, start: startMin, end: endMin }, reservations);
+    var check = R.validateBooking({ date: date, start: startMin, end: endMin }, reservations, w);
     if (!check.ok) {
       box.appendChild(el('p', 'price-error', check.message));
       submit.disabled = true;
@@ -205,9 +218,7 @@
       box.appendChild(row);
     });
     box.appendChild(el('p', 'price-note', paymentNote(date, price.total)));
-    if (opts.needsApproval) {
-      box.appendChild(el('p', 'price-note', 'This date needs approval from the office before it is confirmed.'));
-    }
+    if (w.note) box.appendChild(el('p', 'price-note', w.note + '.'));
     submitAllowed = true;
     submit.disabled = false;
   }
@@ -223,7 +234,6 @@
     var endMin = startMin + Number(data.get('hours')) * 60;
     var price = R.priceFor(data.get('package'), startMin, endMin);
     var info = H.dayInfo(date);
-    var approval = R.optionsFor(date, { holiday: info.holidayMajor, shabbatOverlap: overlapsShabbat(date, endMin) }).needsApproval;
 
     var body = [
       'Names: ' + data.get('names'),
@@ -236,7 +246,6 @@
       paymentNote(date, price.total),
       'Expected guests: ' + (data.get('guests') || '-'),
       'Would like to start with: ' + data.get('visit'),
-      approval ? 'Note: this date needs approval from the office.' : '',
       '',
       'Please confirm this date and time. Nothing is booked until it is confirmed.',
       '',
@@ -255,7 +264,10 @@
     $('cal-next').addEventListener('click', function () { moveMonth(1); });
     ['date', 'start', 'hours', 'package'].forEach(function (id) {
       $(id).addEventListener('change', function () {
-        if (id === 'date') render();
+        if (id === 'date') {
+          if ($('date').value) fitToWindow(R.windowFor(H.dayInfo($('date').value)));
+          render();
+        }
         refresh();
       });
     });

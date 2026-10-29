@@ -92,10 +92,46 @@ test('packages offered depend on the day', () => {
   assert.deepEqual(R.optionsFor('2026-11-08').packages, ['weekend', 'extended']);
 });
 
-test('Shabbat needs approval; a plain weekday does not', () => {
-  assert.equal(R.optionsFor('2026-11-07').needsApproval, true);
-  assert.equal(R.optionsFor('2026-11-02').needsApproval, false);
-  assert.equal(R.optionsFor('2026-11-02', { holiday: true }).needsApproval, true);
+test('Yom Tov is closed all day', () => {
+  const w = R.windowFor({ weekday: 3, holidayMajor: true, holiday: 'Rosh Hashanah' });
+  assert.equal(w.closed, true);
+  assert.equal(R.validateBooking(res('2026-09-12', 12, 16), [], w).reason, 'closed');
+});
+
+test('Saturday opens at 6 PM when Shabbat ends earlier', () => {
+  const w = R.windowFor({ weekday: 6, havdalah: 17 * 60 + 45, candles: 16 * 60 + 40 });
+  assert.equal(w.earliest, 18 * 60);
+  assert.equal(R.validateBooking(res('2026-11-07', 14, 17), [], w).reason, 'hours');
+  assert.deepEqual(R.validateBooking(res('2026-11-07', 18, 22), [], w), { ok: true });
+});
+
+test('Saturday opens after Shabbat ends when that is later than 6 PM', () => {
+  const w = R.windowFor({ weekday: 6, havdalah: 20 * 60 + 10, candles: 19 * 60 + 10 });
+  assert.equal(w.earliest, 20 * 60 + 30);   // rounded up to the next half hour
+  assert.equal(w.closed, false);
+});
+
+test('a summer Saturday with too little time after Shabbat is closed', () => {
+  const w = R.windowFor({ weekday: 6, havdalah: 21 * 60 + 15, candles: 20 * 60 + 15 });
+  assert.equal(w.closed, true);
+});
+
+test('Friday and the day before Yom Tov close at candle lighting', () => {
+  const fri = R.windowFor({ weekday: 5, candles: 16 * 60 + 46 });
+  assert.equal(fri.latest, 16 * 60 + 30);
+  assert.equal(R.validateBooking(res('2026-11-06', 13, 17), [], fri).reason, 'hours');
+  assert.deepEqual(R.validateBooking(res('2026-11-06', 11, 16), [], fri), { ok: true });
+  const erev = R.windowFor({ weekday: 1, candles: 18 * 60 + 40, nextHolidayMajor: true });
+  assert.equal(erev.latest, 18 * 60 + 30);
+});
+
+test('Saturday before Yom Tov is closed', () => {
+  const w = R.windowFor({ weekday: 6, havdalah: 19 * 60 + 30, candles: 18 * 60 + 30, nextHolidayMajor: true });
+  assert.equal(w.closed, true);
+});
+
+test('Saturday night uses the weekend rate', () => {
+  assert.deepEqual(R.optionsFor('2026-11-07').packages, ['weekend', 'extended']);
 });
 
 test('reservation terms: 50% now, balance 14 days before', () => {

@@ -37,12 +37,12 @@ Open `index.html` in a browser. Or upload the whole `wedding-hall/` folder to an
 ## Calendar and bookings
 
 - **Calendar:** shows each day's Hebrew date. Fridays show candle lighting and Saturdays show the parashah and havdalah. All of this is calculated by `js/hebrew-calendar.js`, so it needs no outside service. Candle lighting is 18 minutes before sunset and havdalah is 42 minutes after, both set in `CONFIG`.
-- **Approval:** Saturdays and Yom Tov days show "Approval needed", because the policy requires advance approval for Shabbat and holiday use. Friday events that run past candle lighting also need approval.
+- **Closed days and hours:** the hall is closed all day on Yom Tov (Rosh Hashanah, Yom Kippur, the Yom Tov days of Sukkot, Shmini Atzeret, Simchat Torah, and the Yom Tov days of Pesach and Shavuot). On Saturday it opens at 6:00 PM or when Shabbat ends, whichever is later, so it stays closed on summer Saturdays when Shabbat ends too late for a 2-hour event. On Fridays and the day before Yom Tov, events end by candle lighting. These rules are in `windowFor()` in `js/booking-rules.js`, and the 6:00 PM time is `shabbatOpensAt` in `CONFIG`.
 - **Rules:** `js/booking-rules.js` holds the rules, in one `CONFIG` block at the top:
   - At least 6 hours between events on the same day, measured from the end of one reserved period (including cleanup) to the start of the next.
   - An event that ends after 6:00 PM is an evening event. Nothing starts before noon the next day after an evening event.
   - Events run between 8:00 AM and 11:00 PM, start on the half hour, and last at least 2 hours.
-- **Pricing:** Weekday (Monday to Thursday), Weekend (Friday and Sunday, assumed) and Extended packages, with additional hours billed per started hour.
+- **Pricing:** Weekday (Monday to Thursday), Weekend (Friday, Saturday night and Sunday, assumed) and Extended packages, with additional hours billed per started hour.
 - **Reserved dates:** `loadReservations()` in `js/availability.js` is not yet connected to a shared booking store. Until it is, no date is marked reserved, and the overlap and 6-hour checks run only against reservations that page has loaded.
 
 Before launch, decide where bookings are stored and connect `loadReservations()` to it. Confirm the assumptions in `CONFIG`, especially the weekend days and the 6:00 PM evening cut-off.

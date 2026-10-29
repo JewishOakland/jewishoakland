@@ -24,7 +24,7 @@
   var MONTHS_COMMON = ['Tishri', 'Heshvan', 'Kislev', 'Tevet', 'Shevat', 'Adar', 'Nisan', 'Iyar', 'Sivan', 'Tamuz', 'Av', 'Elul'];
   var MONTHS_LEAP = ['Tishri', 'Heshvan', 'Kislev', 'Tevet', 'Shevat', 'Adar I', 'Adar II', 'Nisan', 'Iyar', 'Sivan', 'Tamuz', 'Av', 'Elul'];
 
-  // Diaspora holidays. "major" days are Yom Tov: approval is needed and there is no weekly reading.
+  // Diaspora holidays. "major" days are Yom Tov: the hall is closed and there is no weekly reading.
   var HOLIDAYS = [
     { month: 'Tishri', day: 1, name: 'Rosh Hashanah', major: true },
     { month: 'Tishri', day: 2, name: 'Rosh Hashanah', major: true },
@@ -32,6 +32,8 @@
     { month: 'Tishri', day: 10, name: 'Yom Kippur', major: true },
     { month: 'Tishri', day: 15, name: 'Sukkot', major: true },
     { month: 'Tishri', day: 16, name: 'Sukkot', major: true },
+    { month: 'Tishri', day: 17, name: 'Sukkot (Chol HaMoed)', major: false, length: 4 },
+    { month: 'Tishri', day: 21, name: 'Hoshana Rabbah', major: false },
     { month: 'Tishri', day: 22, name: 'Shmini Atzeret', major: true },
     { month: 'Tishri', day: 23, name: 'Simchat Torah', major: true },
     { month: 'Kislev', day: 25, name: 'Chanukah', major: false, length: 8 },
@@ -292,25 +294,24 @@
     var wd = weekdayOf(n);
     var hd = fromDayNumber(n);
     var hol = holidayOn(n);
+    var next = holidayOn(n + 1);
+    var times = shabbatTimes(n);
     var info = {
       date: dateKey(n),
       weekday: wd,
       hebrew: hd,
       hebrewNumeral: hebrewNumeral(hd.day),
       holiday: hol ? hol.name : null,
-      holidayMajor: !!(hol && hol.major)
+      holidayMajor: !!(hol && hol.major),
+      nextHolidayMajor: !!(next && next.major),
+      nextHoliday: next && next.major ? next.name : null,
+      sunset: times.sunset,
+      candles: times.candles,
+      candlesText: clockText(times.candles),
+      havdalah: times.havdalah,
+      havdalahText: clockText(times.havdalah)
     };
-    if (wd === 5) {
-      var fri = shabbatTimes(n);
-      info.candles = fri.candles;
-      info.candlesText = clockText(fri.candles);
-    }
-    if (wd === 6) {
-      var sat = shabbatTimes(n);
-      info.havdalah = sat.havdalah;
-      info.havdalahText = clockText(sat.havdalah);
-      info.parsha = parashaOn(n);
-    }
+    if (wd === 6) info.parsha = parashaOn(n);
     return info;
   }
 
