@@ -231,7 +231,6 @@ h3 { font-size: 1.5rem; }
 .feature-photo { overflow: hidden; aspect-ratio: 4 / 3; background: var(--sand); }
 .feature-photo img { width: 100%; height: 100%; object-fit: cover; }
 .feature p { color: var(--muted); }
-.fact { font-family: var(--serif); font-size: 2.6rem; line-height: 1; color: var(--espresso); margin: .2em 0 .3em; }
 
 .info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 64px; }
 .info-grid p { color: var(--muted); }
