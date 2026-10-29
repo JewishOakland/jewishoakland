@@ -12,7 +12,10 @@ Open `index.html` in a browser. Or upload the whole `wedding-hall/` folder to an
 | --- | --- |
 | `index.html` | All the content and structure |
 | `css/styles.css` | Colours, type and layout. The colour and font tokens are at the top, in `:root` |
-| `js/main.js` | Slideshow, photo strip, photo viewer, reveal-on-scroll and enquiry form |
+| `js/main.js` | Slideshow, photo strip, photo viewer and reveal-on-scroll |
+| `js/booking-rules.js` | Scheduling rules and pricing (no page code). Tested in `tests/` |
+| `js/availability.js` | Calendar, Hebcal times and the booking request form |
+| `tests/booking-rules.test.js` | Tests for the rules. Run with `node --test tests/booking-rules.test.js` |
 | `images/` | The hall's photographs, resized for the web |
 
 ## Before launch
@@ -29,3 +32,16 @@ Open `index.html` in a browser. Or upload the whole `wedding-hall/` folder to an
 - The hero slideshow changes slowly and the photo strip drifts continuously. Both can be paused with the **Pause motion** button at the bottom left.
 - Visitors who have asked their device to reduce motion see a still page and the motion button starts in the paused state.
 - Photos can be opened full size with the mouse, keyboard or touch. Use the arrow keys to move between them and Escape to close.
+
+## Calendar and bookings
+
+- **Calendar:** shows each day's Hebrew date. Fridays show candle lighting and Saturdays show the parashah and havdalah. Times and the parashah come from the Hebcal API, using Oakland's location, and are fetched in the visitor's browser.
+- **Approval:** Saturdays and Yom Tov days show "Approval needed", because the policy requires advance approval for Shabbat and holiday use. Friday events that run past candle lighting also need approval.
+- **Rules:** `js/booking-rules.js` holds the rules, in one `CONFIG` block at the top:
+  - At least 6 hours between events on the same day, measured from the end of one reserved period (including cleanup) to the start of the next.
+  - An event that ends after 6:00 PM is an evening event. Nothing starts before noon the next day after an evening event.
+  - Events run between 8:00 AM and 11:00 PM, start on the half hour, and last at least 2 hours.
+- **Pricing:** Weekday (Monday to Thursday), Weekend (Friday and Sunday, assumed) and Extended packages, with additional hours billed per started hour.
+- **Reserved dates:** `loadReservations()` in `js/availability.js` is not yet connected to a shared booking store. Until it is, no date is marked reserved, and the overlap and 6-hour checks run only against reservations that page has loaded.
+
+Before launch, decide where bookings are stored and connect `loadReservations()` to it. Confirm the assumptions in `CONFIG`, especially the weekend days and the 6:00 PM evening cut-off.

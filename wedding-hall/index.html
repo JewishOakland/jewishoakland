@@ -25,6 +25,7 @@
       <a href="#hall">The Hall</a>
       <a href="#celebrations">Celebrations</a>
       <a href="#rates">Rates</a>
+      <a href="#availability">Calendar</a>
       <a href="#plan">Planning</a>
       <a href="#visit">Visit</a>
       <a class="nav-cta" href="#enquire">Enquire</a>
@@ -248,6 +249,33 @@
     </div>
   </section>
 
+  <section class="section availability" id="availability">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="eyebrow">Availability</p>
+        <h2>Find your date</h2>
+        <p class="lede">Each day shows its Hebrew date, and Fridays and Saturdays show candle lighting, parashah and havdalah times. Choose an open day to request it.</p>
+      </header>
+      <div class="cal">
+        <div class="cal-bar">
+          <button type="button" class="cal-nav" id="cal-prev" aria-label="Previous month">&lsaquo;</button>
+          <div class="cal-title">
+            <span class="cal-month" id="cal-month"></span>
+            <span class="cal-hebrew" id="cal-hebrew"></span>
+          </div>
+          <button type="button" class="cal-nav" id="cal-next" aria-label="Next month">&rsaquo;</button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <ul class="cal-legend">
+          <li><span class="sw sw-open"></span>Open</li>
+          <li><span class="sw sw-approval"></span>Needs approval (Shabbat and holidays)</li>
+          <li><span class="sw sw-booked"></span>Reserved</li>
+        </ul>
+        <p class="small cal-source">Candle lighting and havdalah times are for Oakland, from Hebcal. Please confirm them before your event.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="section enquire" id="enquire">
     <div class="wrap enquire-wrap">
       <div class="enquire-intro">
@@ -281,7 +309,22 @@
         </div>
         <div class="field">
           <label for="date">Event date</label>
-          <input id="date" name="date" type="date">
+          <input id="date" name="date" type="date" required>
+        </div>
+        <div class="field">
+          <label for="start">Start time</label>
+          <select id="start" name="start"></select>
+        </div>
+        <div class="field">
+          <label for="hours">Length</label>
+          <select id="hours" name="hours"></select>
+        </div>
+        <div class="field">
+          <label for="package">Package</label>
+          <select id="package" name="package"></select>
+        </div>
+        <div class="field full">
+          <div class="price-box" id="price" aria-live="polite"></div>
         </div>
         <div class="field">
           <label for="guests">Expected guests</label>
@@ -358,6 +401,8 @@
   <button class="lb-next" type="button" aria-label="Next photograph">›</button>
 </dialog>
 
+<script src="js/booking-rules.js"></script>
+<script src="js/availability.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

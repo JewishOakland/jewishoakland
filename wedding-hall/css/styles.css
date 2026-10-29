@@ -296,6 +296,51 @@ h3 { font-size: 1.6rem; }
 .fees dt { color: var(--espresso); }
 .fees dd { margin: 0; font-weight: 600; text-align: right; }
 
+/* Availability calendar */
+.availability { background: var(--white); }
+.cal { max-width: 960px; margin: 0 auto; }
+.cal-bar { display: grid; grid-template-columns: 48px 1fr 48px; align-items: center; margin-bottom: 20px; text-align: center; }
+.cal-title { display: flex; flex-direction: column; gap: 2px; }
+.cal-month { font-family: var(--serif); font-size: 2rem; color: var(--espresso); line-height: 1.1; }
+.cal-hebrew { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--champagne); }
+.cal-nav { background: none; border: 1px solid var(--line); width: 44px; height: 44px; font-family: var(--serif); font-size: 1.6rem; line-height: 1; color: var(--espresso); cursor: pointer; }
+.cal-nav:hover { border-color: var(--champagne); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.cal-dow { padding: 10px 6px; font-size: .68rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); text-align: center; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--ivory); }
+.cal-blank { background: var(--ivory); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.cal-day { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 104px; padding: 8px 8px 6px; border: 0; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--white); text-align: left; font: inherit; color: var(--espresso); overflow: hidden; }
+button.cal-day { cursor: pointer; }
+button.cal-day:hover { background: var(--linen); }
+button.cal-day:focus-visible { outline: 1px solid var(--champagne); outline-offset: -3px; }
+.cal-num { font-family: var(--serif); font-size: 1.35rem; line-height: 1; }
+.cal-heb { font-size: .7rem; color: var(--champagne); }
+.cal-note { font-size: .68rem; line-height: 1.3; color: var(--muted); }
+.cal-parsha { font-style: italic; color: var(--espresso); }
+.cal-approval-note { color: #8a6a2c; font-weight: 600; }
+.cal-day.is-approval { background: #fbf6ea; }
+.cal-day.is-booked { background: var(--linen); color: var(--muted); }
+.cal-day.is-booked .cal-num { text-decoration: line-through; text-decoration-color: var(--champagne); }
+.cal-day.is-booked .cal-note:first-of-type { color: var(--espresso); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: .62rem; }
+.cal-day.is-past { color: #b9b1a5; background: var(--ivory); }
+.cal-day.is-selected { box-shadow: inset 0 0 0 2px var(--champagne); }
+.cal-legend { display: flex; flex-wrap: wrap; gap: 8px 24px; list-style: none; padding: 0; margin: 20px 0 8px; font-size: .85rem; color: var(--muted); }
+.cal-legend li { display: flex; align-items: center; gap: 8px; }
+.sw { display: inline-block; width: 14px; height: 14px; border: 1px solid var(--line); }
+.sw-open { background: var(--white); }
+.sw-approval { background: #fbf6ea; }
+.sw-booked { background: var(--linen); }
+.cal-source { margin: 0; }
+.price-box { border: 1px solid var(--line); background: var(--ivory); padding: 20px 22px; font-size: .95rem; }
+.price-hint { color: var(--muted); margin: 0; }
+.price-title { font-family: var(--serif); font-size: 1.35rem; color: var(--espresso); margin: 0 0 10px; }
+.price-row { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 1px solid var(--line); color: var(--muted); }
+.price-row.is-total { border-bottom: 0; color: var(--espresso); font-weight: 600; }
+.price-note { margin: 10px 0 0; font-size: .88rem; color: var(--muted); }
+.price-error { margin: 0; color: #9a3b2e; font-weight: 600; }
+select { font: inherit; font-size: 1rem; color: var(--espresso); background: var(--ivory); border: 0; border-bottom: 1px solid var(--champagne-soft); padding: 10px 2px; border-radius: 0; width: 100%; }
+select:focus { outline: none; border-bottom-color: var(--champagne); background: var(--white); }
+.enquiry button[disabled] { opacity: .45; cursor: not-allowed; }
+
 /* Planning steps */
 .plan { background: var(--linen); }
 .steps {
@@ -477,6 +522,7 @@ h3 { font-size: 1.6rem; }
   .nav a::after { display: none; }
   .nav-cta { margin: 12px 28px 0; width: auto; text-align: center; }
   .cards { grid-template-columns: 1fr 1fr; }
+  .cal-day { min-height: 84px; }
   .rate-cards { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
   .policy-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .steps { grid-template-columns: 1fr 1fr; row-gap: 48px; }
@@ -500,6 +546,12 @@ h3 { font-size: 1.6rem; }
   .steps li { border-left: 0; border-top: 1px solid var(--line); padding: 28px 8px; }
   .steps li:first-child { border-top: 0; }
   .enquiry { grid-template-columns: 1fr; padding: 28px 22px; }
+  .cal-day { min-height: 64px; padding: 6px 5px; }
+  .cal-note { font-size: .6rem; }
+  .cal-heb { font-size: .6rem; }
+  .cal-num { font-size: 1.1rem; }
+  .cal-dow { font-size: .58rem; letter-spacing: .1em; padding: 8px 2px; }
+  .cal-month { font-size: 1.5rem; }
   .motion-toggle { left: 16px; bottom: 16px; }
 }
 

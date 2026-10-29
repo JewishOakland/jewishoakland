@@ -2,8 +2,6 @@
 (function () {
   'use strict';
 
-  // Where enquiries are sent. Change this to the venue's own inbox.
-  var ENQUIRY_EMAIL = 'info@jewishoakland.org';
   var SLIDE_SECONDS = 7;
 
   var root = document.documentElement;
@@ -115,24 +113,4 @@
     });
   }
 
-  // Enquiry: opens a pre-filled email to the venue. Nothing is stored or sent by the page itself.
-  document.getElementById('enquiry').addEventListener('submit', function (e) {
-    e.preventDefault();
-    var data = new FormData(e.target);
-    var body = [
-      'Names: ' + data.get('names'),
-      'Email: ' + data.get('email'),
-      'Phone: ' + (data.get('phone') || '-'),
-      'Celebration: ' + data.get('celebration'),
-      'Wedding date: ' + (data.get('date') || 'Flexible'),
-      'Expected guests: ' + (data.get('guests') || '-'),
-      'Would like to start with: ' + data.get('visit'),
-      '',
-      data.get('message') || ''
-    ].join('\n');
-    var subject = 'Wedding enquiry: ' + data.get('names');
-    window.location.href = 'mailto:' + ENQUIRY_EMAIL +
-      '?subject=' + encodeURIComponent(subject) +
-      '&body=' + encodeURIComponent(body);
-  });
 })();
