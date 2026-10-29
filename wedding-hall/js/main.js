@@ -1,4 +1,4 @@
-/* Lakeshore Zadik Hall: behaviour. No dependencies. */
+/* The Zadik Hall: behaviour. No dependencies. */
 (function () {
   'use strict';
 
