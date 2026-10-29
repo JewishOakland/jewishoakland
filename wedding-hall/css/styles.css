@@ -277,6 +277,25 @@ h3 { font-size: 1.6rem; }
 .card h3 { margin-bottom: .6em; }
 .card p { color: var(--muted); margin: 0; }
 
+/* Rates and policies */
+.rate-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.rate { background: var(--white); border: 1px solid var(--line); padding: 44px 32px 40px; text-align: center; }
+.rate h3 { font-size: 1.5rem; margin-bottom: .2em; }
+.price { font-family: var(--serif); font-size: 3.2rem; line-height: 1; color: var(--espresso); margin: 14px 0 20px; }
+.rate-desc { color: var(--muted); font-size: .95rem; margin: 0 0 18px; }
+.rate-extra { font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--champagne); margin: 0; }
+.rate-note { max-width: 760px; margin: 40px auto 64px; text-align: center; color: var(--muted); font-size: .95rem; }
+.policy-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px 64px; padding: 44px 0; border-top: 1px solid var(--line); }
+.policy h3 { font-size: 1.5rem; margin-bottom: .6em; }
+.policy p { color: var(--muted); }
+.ticks { list-style: none; padding: 0; margin: 0 0 14px; }
+.ticks li { position: relative; padding: 9px 0 9px 22px; border-bottom: 1px solid var(--line); color: var(--muted); }
+.ticks li::before { content: ""; position: absolute; left: 0; top: 19px; width: 9px; height: 1px; background: var(--champagne); }
+.fees { margin: 0 0 14px; }
+.fees div { display: flex; justify-content: space-between; gap: 18px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.fees dt { color: var(--espresso); }
+.fees dd { margin: 0; font-weight: 600; text-align: right; }
+
 /* Planning steps */
 .plan { background: var(--linen); }
 .steps {
@@ -458,6 +477,8 @@ h3 { font-size: 1.6rem; }
   .nav a::after { display: none; }
   .nav-cta { margin: 12px 28px 0; width: auto; text-align: center; }
   .cards { grid-template-columns: 1fr 1fr; }
+  .rate-cards { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .policy-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
   .steps { grid-template-columns: 1fr 1fr; row-gap: 48px; }
   .steps li:nth-child(3) { border-left: 0; }
   .enquire-wrap { grid-template-columns: 1fr; }
