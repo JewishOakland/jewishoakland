@@ -1,0 +1,52 @@
+# Publishes the hall website (wedding-hall/) to GitHub Pages.
+# Every push that touches the site runs the tests. Only pushes to the default branch publish.
+# One-time setup: Settings > Pages > Build and deployment > Source: GitHub Actions.
+name: Hall website
+
+on:
+  push:
+    paths:
+      - 'wedding-hall/**'
+      - '.github/workflows/hall-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: hall-site-pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run the calendar and booking rule tests
+        run: node --test wedding-hall/tests/*.test.js
+
+  publish:
+    needs: test
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Collect the website files only
+        run: |
+          mkdir _site
+          cp wedding-hall/*.html _site/
+          cp -r wedding-hall/css wedding-hall/js wedding-hall/images _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4
