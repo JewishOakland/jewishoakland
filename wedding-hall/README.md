@@ -16,7 +16,7 @@ Open `index.html` in a browser. Or upload the whole `wedding-hall/` folder to an
 | `js/booking-rules.js` | Scheduling rules and pricing (no page code). Tested in `tests/` |
 | `js/hebrew-calendar.js` | Our own Hebrew calendar: Hebrew dates, holidays, parashah, and candle-lighting and havdalah times for Oakland. No outside service. Tested in `tests/` |
 | `js/availability.js` | Calendar and the booking request form |
-| `tests/` | Tests. Run with `node --test tests/` |
+| `tests/` | Tests. Run with `node --test tests/*.test.js` |
 | `images/` | The hall's photographs, resized for the web |
 
 ## Before launch
