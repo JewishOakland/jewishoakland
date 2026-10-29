@@ -116,13 +116,19 @@ test('a summer Saturday with too little time after Shabbat is closed', () => {
   assert.equal(w.closed, true);
 });
 
-test('Friday and the day before Yom Tov close at candle lighting', () => {
+test('Friday events can run into Shabbat; candle lighting is information only', () => {
   const fri = R.windowFor({ weekday: 5, candles: 16 * 60 + 46 });
-  assert.equal(fri.latest, 16 * 60 + 30);
-  assert.equal(R.validateBooking(res('2026-11-06', 13, 17), [], fri).reason, 'hours');
-  assert.deepEqual(R.validateBooking(res('2026-11-06', 11, 16), [], fri), { ok: true });
+  assert.equal(fri.latest, R.CONFIG.latestEnd);
+  assert.equal(fri.closed, false);
+  assert.deepEqual(R.validateBooking(res('2026-11-06', 18, 23), [], fri), { ok: true });
+});
+
+test('the day before Yom Tov closes at candle lighting, including a Friday', () => {
   const erev = R.windowFor({ weekday: 1, candles: 18 * 60 + 40, nextHolidayMajor: true });
   assert.equal(erev.latest, 18 * 60 + 30);
+  assert.equal(R.validateBooking(res('2026-09-20', 15, 20), [], erev).reason, 'hours');
+  const friErev = R.windowFor({ weekday: 5, candles: 18 * 60 + 15, nextHolidayMajor: true });
+  assert.equal(friErev.latest, 18 * 60);
 });
 
 test('Saturday before Yom Tov is closed', () => {

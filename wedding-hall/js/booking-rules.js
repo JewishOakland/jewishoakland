@@ -84,7 +84,7 @@
   // When the hall can be used on a day, given that day's calendar information:
   // { weekday, holidayMajor, holiday, candles, havdalah, nextHolidayMajor } (times in minutes).
   // Yom Tov is closed all day. Saturday opens at 6:00 PM or after Shabbat ends, whichever is later.
-  // Fridays and the day before Yom Tov close at candle lighting.
+  // The day before Yom Tov closes at candle lighting. Friday candle lighting is for information only.
   function windowFor(day) {
     var w = { earliest: CONFIG.earliestStart, latest: CONFIG.latestEnd, closed: false, note: null };
     if (day.holidayMajor) {
@@ -98,9 +98,9 @@
       w.earliest = Math.max(w.earliest, opens);
       w.note = 'Shabbat: open from ' + formatTime(w.earliest);
     }
-    if ((day.weekday === 5 || day.nextHolidayMajor) && day.candles != null) {
+    if (day.nextHolidayMajor && day.candles != null) {
       w.latest = Math.min(w.latest, roundDown(day.candles));
-      w.note = (day.weekday === 5 ? 'Erev Shabbat' : 'Erev Yom Tov') + ': events end by ' + formatTime(w.latest);
+      w.note = 'Erev Yom Tov: events end by ' + formatTime(w.latest);
     }
     if (w.latest - w.earliest < CONFIG.minHours * 60) {
       w.closed = true;
