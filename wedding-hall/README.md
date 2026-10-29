@@ -14,8 +14,9 @@ Open `index.html` in a browser. Or upload the whole `wedding-hall/` folder to an
 | `css/styles.css` | Colours, type and layout. The colour and font tokens are at the top, in `:root` |
 | `js/main.js` | Slideshow, photo strip, photo viewer and reveal-on-scroll |
 | `js/booking-rules.js` | Scheduling rules and pricing (no page code). Tested in `tests/` |
-| `js/availability.js` | Calendar, Hebcal times and the booking request form |
-| `tests/booking-rules.test.js` | Tests for the rules. Run with `node --test tests/booking-rules.test.js` |
+| `js/hebrew-calendar.js` | Our own Hebrew calendar: Hebrew dates, holidays, parashah, and candle-lighting and havdalah times for Oakland. No outside service. Tested in `tests/` |
+| `js/availability.js` | Calendar and the booking request form |
+| `tests/` | Tests. Run with `node --test tests/` |
 | `images/` | The hall's photographs, resized for the web |
 
 ## Before launch
@@ -35,7 +36,7 @@ Open `index.html` in a browser. Or upload the whole `wedding-hall/` folder to an
 
 ## Calendar and bookings
 
-- **Calendar:** shows each day's Hebrew date. Fridays show candle lighting and Saturdays show the parashah and havdalah. Times and the parashah come from the Hebcal API, using Oakland's location, and are fetched in the visitor's browser.
+- **Calendar:** shows each day's Hebrew date. Fridays show candle lighting and Saturdays show the parashah and havdalah. All of this is calculated by `js/hebrew-calendar.js`, so it needs no outside service. Candle lighting is 18 minutes before sunset and havdalah is 42 minutes after, both set in `CONFIG`.
 - **Approval:** Saturdays and Yom Tov days show "Approval needed", because the policy requires advance approval for Shabbat and holiday use. Friday events that run past candle lighting also need approval.
 - **Rules:** `js/booking-rules.js` holds the rules, in one `CONFIG` block at the top:
   - At least 6 hours between events on the same day, measured from the end of one reserved period (including cleanup) to the start of the next.

@@ -1,21 +1,20 @@
 /* The Zadik Hall: availability calendar and reservation request form.
-   Needs js/booking-rules.js to be loaded first.
+   Needs js/booking-rules.js and js/hebrew-calendar.js to be loaded first.
 
-   Shabbat and holiday times come from Hebcal. Reserved dates come from loadReservations(),
-   which is not connected to a shared store yet, so no date is marked reserved until it is. */
+   Hebrew dates, holidays, parashah and Shabbat times are calculated by js/hebrew-calendar.js.
+   Reserved dates come from loadReservations(), which is not connected to a shared store yet,
+   so no date is marked reserved until it is. */
 (function () {
   'use strict';
 
   var R = window.BookingRules;
+  var H = window.HebrewCalendar;
   var ENQUIRY_EMAIL = 'info@jewishoakland.org';
-  var LAT = 37.8107, LON = -122.2437, TZ = 'America/Los_Angeles';
-  var WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
+  var WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   var now = new Date();
   var todayKey = keyOf(now);
   var view = { year: now.getFullYear(), month: now.getMonth() };
-  var shabbatDays = {};      // 'YYYY-MM-DD' -> { candles, candlesText, havdalah, parsha, holiday }
-  var loadedMonths = {};     // 'YYYY-MM' -> true once Hebcal has been asked
   var reservations = [];     // [{ date, start, end }] in minutes
   var submitAllowed = false;
 
@@ -29,6 +28,19 @@
     return node;
   }
   function money(n) { return '$' + n.toLocaleString('en-US'); }
+
+  // Live reservations. Connect this to the venue's booking store, returning
+  // [{ date: 'YYYY-MM-DD', start: minutes, end: minutes }] for the range. Until then, nothing is reserved.
+  function loadReservations(fromKey, toKey) {
+    return Promise.resolve([]);
+  }
+
+  function ensureReservations() {
+    var first = new Date(view.year, view.month, 1);
+    var last = new Date(view.year, view.month + 1, 0);
+    return loadReservations(keyOf(new Date(first.getTime() - 86400000)), keyOf(new Date(last.getTime() + 86400000)))
+      .then(function (list) { reservations = list || []; });
+  }
 
   // Bookings made within 14 days of the event owe the full fee and deposit up front.
   // Otherwise 50% now and the balance 14 days before the event.
@@ -44,76 +56,14 @@
       '. Refundable security deposit: ' + money(terms.securityDeposit) +
       '. Balance due by ' + due + '.';
   }
-  function clock(iso) {
-    return new Date(iso).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: TZ });
-  }
-  function minutesOf(iso) {
-    return Number(iso.slice(11, 13)) * 60 + Number(iso.slice(14, 16));
-  }
-
-  // Shabbat, parashah and holiday data from Hebcal, for Oakland
-  function loadMonthData(year, month) {
-    var k = year + '-' + pad(month + 1);
-    if (loadedMonths[k]) return Promise.resolve();
-    loadedMonths[k] = true;
-    var url = 'https://www.hebcal.com/hebcal?v=1&cfg=json&year=' + year + '&month=' + (month + 1) +
-      '&ss=on&mf=on&c=on&M=on&m=18&s=on&i=off&maj=on&min=on&mod=on&nx=on' +
-      '&geo=pos&latitude=' + LAT + '&longitude=' + LON + '&tzid=' + encodeURIComponent(TZ);
-    return fetch(url)
-      .then(function (r) { if (!r.ok) throw new Error('Hebcal ' + r.status); return r.json(); })
-      .then(function (data) {
-        (data.items || []).forEach(function (item) {
-          var key = item.date.slice(0, 10);
-          var day = shabbatDays[key] || (shabbatDays[key] = {});
-          if (item.category === 'candles') {
-            day.candles = minutesOf(item.date);
-            day.candlesText = clock(item.date);
-          } else if (item.category === 'havdalah') {
-            day.havdalahText = clock(item.date);
-          } else if (item.category === 'parashat') {
-            day.parsha = item.title.replace(/^Parashat\s+/, '');
-          } else if (item.category === 'holiday' && item.subcat === 'major') {
-            day.holiday = item.title;
-          }
-        });
-      })
-      .catch(function () { loadedMonths[k] = 'failed'; });
-  }
-
-  // Live reservations. Connect this to the venue's booking store, returning
-  // [{ date: 'YYYY-MM-DD', start: minutes, end: minutes }] for the range. Until then, nothing is reserved.
-  function loadReservations(fromKey, toKey) {
-    return Promise.resolve([]);
-  }
-
-  function ensureReservations() {
-    var first = new Date(view.year, view.month, 1);
-    var last = new Date(view.year, view.month + 1, 0);
-    return loadReservations(keyOf(new Date(first.getTime() - 86400000)), keyOf(new Date(last.getTime() + 86400000)))
-      .then(function (list) { reservations = list || []; });
-  }
-
-  function hebrewLabel(date, isFirst) {
-    var num = new Intl.DateTimeFormat('he-u-ca-hebrew', { day: 'numeric' }).format(date);
-    if (!isFirst) return num;
-    var month = new Intl.DateTimeFormat('en-u-ca-hebrew', { month: 'long' }).format(date);
-    return month + ' ' + num;
-  }
-
-  function hebrewRange(year, month, count) {
-    var fmt = new Intl.DateTimeFormat('en-u-ca-hebrew', { month: 'long', year: 'numeric' });
-    var a = fmt.format(new Date(year, month, 1)), b = fmt.format(new Date(year, month, count));
-    return a === b ? a : a + ' to ' + b;
-  }
 
   function dayCell(year, month, d) {
     var date = new Date(year, month, d);
     var key = keyOf(date);
-    var wd = date.getDay();
-    var info = shabbatDays[key] || {};
+    var info = H.dayInfo(key);
     var booked = reservations.some(function (r) { return r.date === key; });
     var past = key < todayKey;
-    var needsApproval = wd === 6 || !!info.holiday;
+    var needsApproval = info.weekday === 6 || info.holidayMajor;
 
     var cls = 'cal-day';
     if (past) cls += ' is-past';
@@ -131,16 +81,24 @@
     }
 
     cell.appendChild(el('span', 'cal-num', String(d)));
-    cell.appendChild(el('span', 'cal-heb', hebrewLabel(date, d === 1)));
+    var heb = d === 1 ? info.hebrew.month + ' ' + info.hebrewNumeral : info.hebrewNumeral;
+    cell.appendChild(el('span', 'cal-heb', heb));
     if (booked) cell.appendChild(el('span', 'cal-note', 'Reserved'));
     if (info.holiday && !booked) cell.appendChild(el('span', 'cal-note', info.holiday));
-    if (wd === 5 && info.candlesText) cell.appendChild(el('span', 'cal-note', 'Candles ' + info.candlesText));
-    if (wd === 6) {
-      if (info.parsha) cell.appendChild(el('span', 'cal-note cal-parsha', info.parsha));
+    if (info.weekday === 5 && info.candlesText) cell.appendChild(el('span', 'cal-note', 'Candles ' + info.candlesText));
+    if (info.weekday === 6) {
+      if (info.parsha) cell.appendChild(el('span', 'cal-note cal-parsha', 'Parashat ' + info.parsha));
       if (info.havdalahText) cell.appendChild(el('span', 'cal-note', 'Ends ' + info.havdalahText));
       if (!booked) cell.appendChild(el('span', 'cal-note cal-approval-note', 'Approval needed'));
     }
     return cell;
+  }
+
+  function hebrewRange(year, month, count) {
+    var first = H.dayInfo(keyOf(new Date(year, month, 1))).hebrew;
+    var last = H.dayInfo(keyOf(new Date(year, month, count))).hebrew;
+    var a = first.month + ' ' + first.year, b = last.month + ' ' + last.year;
+    return a === b ? a : a + ' to ' + b;
   }
 
   function render() {
@@ -165,7 +123,6 @@
 
   function refreshMonth() {
     render();
-    loadMonthData(view.year, view.month).then(function () { render(); refresh(); });
     ensureReservations().then(function () { render(); refresh(); });
   }
 
@@ -201,13 +158,10 @@
     select.value = keys.indexOf(previous) !== -1 ? previous : keys[0];
   }
 
-  // Friday events that run past candle lighting, or any Friday event without times loaded after 4 PM
-  function overlapsShabbat(date, startMin, endMin) {
-    var wd = new Date(date + 'T12:00:00').getDay();
-    if (wd !== 5) return false;
-    var info = shabbatDays[date] || {};
-    var candles = info.candles != null ? info.candles : 16 * 60;
-    return endMin > candles;
+  // A Friday event that runs past candle lighting needs approval
+  function overlapsShabbat(date, endMin) {
+    var info = H.dayInfo(date);
+    return info.weekday === 5 && info.candles != null && endMin > info.candles;
   }
 
   function refresh() {
@@ -222,14 +176,11 @@
       submit.disabled = false;
       return;
     }
-    if (!shabbatDays[date] && !loadedMonths[date.slice(0, 4) + '-' + date.slice(5, 7)]) {
-      loadMonthData(Number(date.slice(0, 4)), Number(date.slice(5, 7)) - 1).then(function () { render(); refresh(); });
-    }
 
     var startMin = Number($('start').value);
     var endMin = startMin + Number($('hours').value) * 60;
-    var info = shabbatDays[date] || {};
-    var opts = R.optionsFor(date, { holiday: !!info.holiday, shabbatOverlap: overlapsShabbat(date, startMin, endMin) });
+    var info = H.dayInfo(date);
+    var opts = R.optionsFor(date, { holiday: info.holidayMajor, shabbatOverlap: overlapsShabbat(date, endMin) });
     fillPackages(opts.packages);
 
     var check = R.validateBooking({ date: date, start: startMin, end: endMin }, reservations);
@@ -240,12 +191,9 @@
     }
 
     var price = R.priceFor($('package').value, startMin, endMin);
-    var terms = R.reservationTerms(price.total, date);
 
     box.appendChild(el('p', 'price-title', price.label + ' · ' + R.formatTime(startMin) + ' to ' + R.formatTime(endMin)));
-    var lines = [
-      ['Base package (' + price.includedHours + ' hours)', money(price.base)]
-    ];
+    var lines = [['Base package (' + price.includedHours + ' hours)', money(price.base)]];
     if (price.extraHours > 0) {
       lines.push([price.extraHours + (price.extraHours === 1 ? ' additional hour' : ' additional hours') + ' at ' + money(price.extraRate) + ' each', money(price.extraCost)]);
     }
@@ -274,15 +222,15 @@
     var startMin = Number(data.get('start'));
     var endMin = startMin + Number(data.get('hours')) * 60;
     var price = R.priceFor(data.get('package'), startMin, endMin);
-    var info = shabbatDays[date] || {};
-    var approval = R.optionsFor(date, { holiday: !!info.holiday, shabbatOverlap: overlapsShabbat(date, startMin, endMin) }).needsApproval;
+    var info = H.dayInfo(date);
+    var approval = R.optionsFor(date, { holiday: info.holidayMajor, shabbatOverlap: overlapsShabbat(date, endMin) }).needsApproval;
 
     var body = [
       'Names: ' + data.get('names'),
       'Email: ' + data.get('email'),
       'Phone: ' + (data.get('phone') || '-'),
       'Celebration: ' + data.get('celebration'),
-      'Date: ' + date,
+      'Date: ' + date + ' (' + info.hebrewNumeral + ' ' + info.hebrew.month + ' ' + info.hebrew.year + ')',
       'Time: ' + R.formatTime(startMin) + ' to ' + R.formatTime(endMin) + ' (' + price.hours + ' hours)',
       'Package: ' + price.label + ' ' + money(price.total),
       paymentNote(date, price.total),
@@ -301,14 +249,13 @@
   }
 
   function init() {
-    var today = keyOf(now);
-    $('date').min = today;
+    $('date').min = todayKey;
     fillTimes();
     $('cal-prev').addEventListener('click', function () { moveMonth(-1); });
     $('cal-next').addEventListener('click', function () { moveMonth(1); });
     ['date', 'start', 'hours', 'package'].forEach(function (id) {
       $(id).addEventListener('change', function () {
-        if (id === 'date') { render(); }
+        if (id === 'date') render();
         refresh();
       });
     });
