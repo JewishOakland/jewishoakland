@@ -4,444 +4,310 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Weekly Letter · Chabad Oakland · Parashat Vayera</title>
-<meta name="description" content="The Weekly Letter from Chabad Jewish Center of Oakland: a note from the Rabbi, this week's Shabbat, upcoming events and a joke.">
 <!--
-  Weekly newsletter template. To make next week's issue, copy this file to
-  newsletter/YYYY-MM-DD.html and replace the content inside <main>.
-  Colours and type live in :root below.
+  The Weekly Letter, Chabad Jewish Center of Oakland.
 
-  DRAFT: the essay is written for Rav Dovid Labkowski to review, revise and
-  approve. Replace it with his own words before sending. Remove the "Draft"
-  label in the essay heading once he has approved it.
+  Built with tables and inline styles so it also works when pasted into an
+  email service. Colours are repeated inline on purpose: many email apps
+  ignore <style> blocks.
+
+  Shabbat times come from Hebcal for Oakland (candle lighting 18 minutes
+  before sunset, havdalah 42 minutes after). Update them each week.
+
+  DRAFT: the essay below is written for Rav Dovid Labkowski to review and
+  replace with his own words before sending.
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ivory: #f7f3ec;
-    --paper: #fffdf9;
-    --ink: #1a1816;
-    --muted: #6b645b;
-    --red: #8c1c22;
-    --gold: #b59360;
-    --gold-soft: #d9c7a3;
-    --line: #e6dccb;
-    --serif: "Cormorant Garamond", "Garamond", "Times New Roman", serif;
-    --sans: "Montserrat", "Helvetica Neue", Arial, sans-serif;
-  }
-
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0;
-    padding: 32px 16px;
-    background: var(--ivory);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.75;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: var(--ink); }
-  img { max-width: 100%; display: block; }
-  p { margin: 0 0 1.1em; }
-  h1, h2, h3 { font-family: var(--serif); font-weight: 500; margin: 0; line-height: 1.15; }
-
-  .sheet {
-    max-width: 640px;
-    margin: 0 auto;
-    background: var(--paper);
-    border: 1px solid var(--gold-soft);
-    outline: 1px solid var(--gold-soft);
-    outline-offset: 6px;
-    padding: 56px 52px 44px;
-  }
-
-  /* Masthead */
-  .masthead { text-align: center; padding-bottom: 28px; }
-  .kicker {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: .38em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin: 0 0 22px;
-  }
-  .wordmark {
-    font-family: var(--serif);
-    font-weight: 500;
-    font-size: 44px;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    line-height: 1;
-    margin: 0 0 10px;
-    color: var(--ink);
-  }
-  .wordmark a { text-decoration: none; }
-  .tagline {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 17px;
-    color: var(--muted);
-    margin: 0;
-  }
-  .rule {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin: 26px 0 0;
-    color: var(--gold);
-  }
-  .rule::before, .rule::after {
-    content: "";
-    width: 80px;
-    height: 1px;
-    background: var(--gold);
-  }
-  .rule span { width: 6px; height: 6px; background: var(--red); transform: rotate(45deg); }
-  .issue-line {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    border-bottom: 1px solid var(--line);
-    padding: 14px 0;
-    margin-bottom: 40px;
-  }
-
-  /* Sections */
-  section { margin-bottom: 52px; }
-  .label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: .32em;
-    text-transform: uppercase;
-    color: var(--red);
-    margin: 0 0 12px;
-  }
-  h2 { font-size: 32px; font-weight: 400; margin-bottom: 22px; }
-  .lede { font-family: var(--serif); font-style: italic; font-size: 19px; color: var(--muted); margin: 0 0 22px; }
-
-  /* Rabbi's essay */
-  .byline {
-    font-family: var(--serif);
-    font-size: 17px;
-    color: var(--muted);
-    margin: -6px 0 24px;
-  }
-  .draft-tag {
-    display: inline-block;
-    margin-left: 10px;
-    padding: 2px 8px;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    font-family: var(--sans);
-    font-size: 9px;
-    letter-spacing: .2em;
-    text-transform: uppercase;
-    vertical-align: middle;
-  }
-  .essay p { font-family: var(--serif); font-size: 19px; line-height: 1.65; color: #2a2622; font-weight: 400; }
-  .essay p:first-of-type::first-letter {
-    float: left;
-    font-size: 64px;
-    line-height: .85;
-    padding: 8px 10px 0 0;
-    color: var(--red);
-    font-weight: 500;
-  }
-  .signature { font-family: var(--serif); font-style: italic; font-size: 18px; margin-top: 18px; }
-
-  /* This Shabbat */
-  .shabbat {
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 24px 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-    text-align: center;
-  }
-  .shabbat .item-label { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
-  .shabbat .item-time { font-family: var(--serif); font-size: 21px; margin: 0 0 4px; }
-  .shabbat a { font-size: 12px; letter-spacing: .08em; color: var(--red); }
-
-  /* Calendar */
-  .events { list-style: none; margin: 0; padding: 0; }
-  .events li {
-    display: grid;
-    grid-template-columns: 74px 1fr;
-    gap: 20px;
-    padding: 16px 0;
-    border-top: 1px solid var(--line);
-  }
-  .events li:last-child { border-bottom: 1px solid var(--line); }
-  .when { text-align: center; border-right: 1px solid var(--gold-soft); padding-right: 14px; }
-  .when .dow { display: block; font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); }
-  .when .day { display: block; font-family: var(--serif); font-size: 34px; line-height: 1.05; color: var(--ink); }
-  .when .mon { display: block; font-size: 9px; letter-spacing: .24em; text-transform: uppercase; color: var(--red); }
-  .events h3 { font-size: 21px; font-weight: 500; margin: 2px 0 4px; }
-  .events h3 a { text-decoration: none; border-bottom: 1px solid var(--gold-soft); }
-  .events h3 a:hover { border-bottom-color: var(--red); }
-  .events .meta { font-size: 13px; color: var(--muted); margin: 0; }
-  .events .more { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; color: var(--red); display: inline-block; margin-top: 6px; }
-
-  /* Weekly rhythm */
-  .weekly { display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
-  .weekly div { padding: 14px 0; border-top: 1px solid var(--line); }
-  .weekly .d { font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--red); margin: 0 0 4px; }
-  .weekly .t { font-family: var(--serif); font-size: 19px; margin: 0; }
-  .weekly .t a { text-decoration: none; border-bottom: 1px solid var(--gold-soft); }
-  .weekly .s { font-size: 13px; color: var(--muted); margin: 0; }
-
-  /* Chanukah feature */
-  .feature {
-    background: var(--ivory);
-    border: 1px solid var(--gold-soft);
-    padding: 34px 30px;
-    text-align: center;
-  }
-  .feature .big { font-family: var(--serif); font-size: 30px; font-weight: 400; margin: 0 0 10px; }
-  .feature p { color: var(--muted); font-size: 14px; max-width: 46ch; margin: 0 auto 20px; }
-
-  /* Buttons */
-  .btn {
-    display: inline-block;
-    padding: 14px 30px;
-    border: 1px solid var(--ink);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .24em;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--ink);
-  }
-  .btn-red { background: var(--red); border-color: var(--red); color: #fff; }
-
-  /* Joke */
-  .joke { text-align: center; }
-  .joke .q { font-family: var(--serif); font-size: 21px; font-style: italic; line-height: 1.5; margin: 0 auto 14px; max-width: 34ch; }
-  .joke .a { font-family: var(--serif); font-size: 19px; margin: 0; }
-  .joke .a em { color: var(--red); font-style: normal; }
-
-  /* Connect */
-  .connect { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .connect a {
-    display: block;
-    padding: 18px 16px;
-    border: 1px solid var(--line);
-    text-align: center;
-    text-decoration: none;
-    font-family: var(--serif);
-    font-size: 19px;
-  }
-  .connect a:hover { border-color: var(--gold); }
-  .connect small { display: block; font-family: var(--sans); font-size: 12px; color: var(--muted); margin-top: 4px; }
-
-  /* Footer */
-  footer { border-top: 1px solid var(--line); padding-top: 32px; text-align: center; font-size: 13px; color: var(--muted); }
-  footer .wordmark-small { font-family: var(--serif); letter-spacing: .24em; text-transform: uppercase; font-size: 18px; color: var(--ink); margin: 0 0 10px; }
-  footer p { margin-bottom: 10px; }
-  footer a { color: var(--muted); }
-  footer .fine { font-size: 11px; letter-spacing: .04em; margin-top: 22px; }
-
-  a:focus-visible { outline: 1px solid var(--gold); outline-offset: 3px; }
-
-  @media (max-width: 600px) {
-    body { padding: 20px 16px; }
-    .sheet { padding: 40px 24px 32px; outline-offset: 4px; }
-    .wordmark { font-size: 34px; letter-spacing: .16em; }
-    h2 { font-size: 28px; }
-    .shabbat { grid-template-columns: 1fr; gap: 14px; }
-    .weekly { grid-template-columns: 1fr; }
-    .connect { grid-template-columns: 1fr; }
-    .essay p { font-size: 18px; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-<div class="sheet">
+<body style="margin:0; padding:0; background:#ece8e0;">
 
-  <header class="masthead">
-    <p class="kicker">The Weekly Letter</p>
-    <p class="wordmark"><a href="https://www.jewishoakland.org/">Chabad Oakland</a></p>
-    <p class="tagline">Chabad Jewish Center of Oakland</p>
-    <div class="rule" aria-hidden="true"><span></span></div>
-  </header>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#ece8e0;">
+<tr>
+<td align="center" style="padding:28px 12px;">
 
-  <div class="issue-line">
-    <span>Friday, October 30, 2026</span>
-    <span>Parashat Vayera</span>
-  </div>
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:100%; max-width:640px; background:#ffffff;">
 
-  <main>
+  <!-- Masthead -->
+  <tr>
+    <td align="center" style="background:#141414; padding:44px 32px 36px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; color:#f4eee2;">
+      <p style="margin:0 0 18px; font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:10px; letter-spacing:4px; text-transform:uppercase; color:#c9a96e;">The Weekly Letter</p>
+      <h1 style="margin:0 0 10px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-weight:500; font-size:40px; line-height:1.05; letter-spacing:6px; text-transform:uppercase; color:#f4eee2;">Chabad Oakland</h1>
+      <p style="margin:0; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-style:italic; font-size:17px; color:#bfb6a6;">Chabad Jewish Center of Oakland</p>
+      <p style="margin:26px 0 0; font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:#bfb6a6;">Friday, October 30, 2026 &nbsp;·&nbsp; 20 Cheshvan 5787</p>
+    </td>
+  </tr>
 
-    <section aria-labelledby="essay-title">
-      <p class="label">From the Rabbi</p>
-      <h2 id="essay-title">The Tent Open on Every Side</h2>
-      <p class="byline">Rav Dovid Labkowski<span class="draft-tag">Draft for Rabbi's review</span></p>
-      <div class="essay">
-        <p>The Torah opens this week with Abraham sitting at the entrance of his tent in the heat of the day. He is recovering from his circumcision, and he has every reason to rest. Yet when he lifts his eyes and sees three strangers standing nearby, he runs to meet them, bows to the ground, and begs them to stay.</p>
-        <p>The Talmud tells us that Abraham's tent was open on all four sides, so that a guest could come in from any direction. Our tradition seems to have understood something important: hospitality is not a feature of a building. It is a way of standing.</p>
-        <p>Notice what Abraham does not do. He does not wait for the visitors to prove they are worthy. He does not ask who they are. He sees a need, and he acts. Only afterward does the story reveal who his guests were.</p>
-        <p>Each of us has a tent. For some it is a home; for others, a workplace, a classroom or a phone. The question Vayera asks is simple: which way does your entrance face?</p>
-        <p>Shabbat is the most open door in Jewish life. Whoever you are and however you arrived, you are welcome at our table this week. Come as you are.</p>
-      </div>
-      <p class="signature">Rav Dovid Labkowski</p>
-    </section>
+  <!-- Parsha -->
+  <tr>
+    <td align="center" style="background:#8c1c22; padding:34px 32px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; color:#ffffff;">
+      <p style="margin:0 0 10px; font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#f1d9b0;">This week's portion</p>
+      <h2 style="margin:0 0 10px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-weight:500; font-size:34px; line-height:1.1; color:#ffffff;">Parashat Vayera</h2>
+      <p style="margin:0; font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:13px; line-height:1.7; color:#f6e7e8;">Genesis 18:1&ndash;22:24 &nbsp;·&nbsp; Haftarah II Kings 4:1&ndash;37</p>
+    </td>
+  </tr>
 
-    <section aria-labelledby="shabbat-title">
-      <p class="label">This Shabbat</p>
-      <h2 id="shabbat-title">Shabbat with us</h2>
-      <div class="shabbat">
-        <div>
-          <p class="item-label">Friday evening</p>
-          <p class="item-time">7:30 PM</p>
-          <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3399">Kabbalat Shabbat, tonight</a>
-        </div>
-        <div>
-          <p class="item-label">Saturday morning</p>
-          <p class="item-time">10:00 AM</p>
-          <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3302">Shabbat Services</a>
-        </div>
-        <div>
-          <p class="item-label">Candles &amp; times</p>
-          <p class="item-time">Oakland</p>
-          <a href="https://www.hebcal.com/shabbat?latitude=37.8107&amp;longitude=-122.2437&amp;tzid=America/Los_Angeles&amp;b=18&amp;M=on">Candle-lighting times</a>
-        </div>
-      </div>
-    </section>
+  <!-- Shabbat times: this week -->
+  <tr>
+    <td style="padding:36px 40px 14px; font-family:Montserrat, Helvetica, Arial, sans-serif; color:#1d1b19;">
+      <p style="margin:0 0 6px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#8c1c22;">Shabbat times</p>
+      <h2 style="margin:0 0 20px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-weight:500; font-size:30px; color:#141414;">Oakland, this weekend</h2>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-top:1px solid #b89a63; border-bottom:1px solid #b89a63;">
+        <tr>
+          <td width="50%" align="center" style="padding:22px 10px; border-right:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <p style="margin:0 0 6px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#6b655c;">Candle lighting</p>
+            <p style="margin:0 0 4px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:26px; color:#141414;">Fri, Oct 30 &middot; 5:54 PM</p>
+            <p style="margin:0; font-size:12px; color:#6b655c;">18 minutes before sunset</p>
+          </td>
+          <td width="50%" align="center" style="padding:22px 10px; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <p style="margin:0 0 6px; font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:#6b655c;">Shabbat ends</p>
+            <p style="margin:0 0 4px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:26px; color:#141414;">Sat, Oct 31 &middot; 6:53 PM</p>
+            <p style="margin:0; font-size:12px; color:#6b655c;">Havdalah, 42 minutes after sunset</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-    <section aria-labelledby="calendar-title">
-      <p class="label">Upcoming</p>
-      <h2 id="calendar-title">On the calendar</h2>
-      <ul class="events">
-        <li>
-          <div class="when"><span class="dow">Sun</span><span class="day">1</span><span class="mon">Nov</span></div>
-          <div>
-            <h3><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3464">Hebrew School of the Arts</a></h3>
-            <p class="meta">10:30 AM · 3014 Lakeshore Ave</p>
-          </div>
-        </li>
-        <li>
-          <div class="when"><span class="dow">Tue</span><span class="day">3</span><span class="mon">Nov</span></div>
-          <div>
-            <h3><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3419">JWC Siddur Soirée</a></h3>
-            <p class="meta">7:00 PM · Chabad Center for Jewish Life, 3014 Lakeshore Ave</p>
-          </div>
-        </li>
-        <li>
-          <div class="when"><span class="dow">Tue</span><span class="day">3</span><span class="mon">Nov</span></div>
-          <div>
-            <h3><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3578">Caffeine for the Soul</a></h3>
-            <p class="meta">11:30 AM · 3014 Lakeshore Ave</p>
-          </div>
-        </li>
-        <li>
-          <div class="when"><span class="dow">Thu</span><span class="day">5</span><span class="mon">Nov</span></div>
-          <div>
-            <h3><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3459">Challah Babies: Mommy and Me</a></h3>
-            <p class="meta">10:00 AM · 3014 Lakeshore Ave</p>
-          </div>
-        </li>
-        <li>
-          <div class="when"><span class="dow">Sun</span><span class="day">22</span><span class="mon">Nov</span></div>
-          <div>
-            <h3><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3575">Latke Wars</a></h3>
-            <p class="meta">5:00 PM · 3014 Lakeshore Ave</p>
-          </div>
-        </li>
-        <li>
-          <div class="when"><span class="dow">Fri</span><span class="day">4</span><span class="mon">Dec</span></div>
-          <div>
-            <h3><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3577">Shabbat Unplugged: Chanukah Edition</a></h3>
-            <p class="meta">7:00 PM · 3014 Lakeshore Ave</p>
-          </div>
-        </li>
-      </ul>
-    </section>
+  <!-- Shabbat times: coming weeks -->
+  <tr>
+    <td style="padding:14px 40px 8px; font-family:Montserrat, Helvetica, Arial, sans-serif; color:#1d1b19;">
+      <p style="margin:0 0 12px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#8c1c22;">Coming weeks</p>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:13px; border-collapse:collapse;">
+        <tr style="color:#6b655c; font-size:10px; letter-spacing:2px; text-transform:uppercase;">
+          <td style="padding:10px 0; border-bottom:1px solid #b89a63;">Portion</td>
+          <td style="padding:10px 0; border-bottom:1px solid #b89a63;" align="center">Candles</td>
+          <td style="padding:10px 0; border-bottom:1px solid #b89a63;" align="right">Shabbat ends</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:19px;">Vayera <span style="font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:11px; color:#6b655c;">&nbsp;Oct 31</span></td>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd;" align="center">5:54 PM</td>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd;" align="right">6:53 PM</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:19px;">Chayei Sara <span style="font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:11px; color:#6b655c;">&nbsp;Nov 7</span></td>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd;" align="center">4:46 PM</td>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd;" align="right">5:46 PM</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:19px;">Toldot <span style="font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:11px; color:#6b655c;">&nbsp;Nov 14</span></td>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd;" align="center">4:40 PM</td>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd;" align="right">5:40 PM</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:19px;">Vayetzei <span style="font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:11px; color:#6b655c;">&nbsp;Nov 21</span></td>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd;" align="center">4:36 PM</td>
+          <td style="padding:12px 0; border-bottom:1px solid #e3dccd;" align="right">5:36 PM</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-    <section aria-labelledby="weekly-title">
-      <p class="label">Every week</p>
-      <h2 id="weekly-title">Standing programs</h2>
-      <div class="weekly">
-        <div>
-          <p class="d">Monday to Friday</p>
-          <p class="t"><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3490">Shacharis, 7:30 AM</a></p>
-          <p class="s">Morning prayer at the center</p>
-        </div>
-        <div>
-          <p class="d">Tuesdays</p>
-          <p class="t"><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3578">Caffeine for the Soul</a></p>
-          <p class="s">11:30 AM · 3014 Lakeshore Ave</p>
-        </div>
-        <div>
-          <p class="d">Wednesdays</p>
-          <p class="t"><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3423">Ladies Tanya Class</a></p>
-          <p class="s">11:30 AM · WhatsApp video</p>
-        </div>
-        <div>
-          <p class="d">Thursdays</p>
-          <p class="t"><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3459">Challah Babies</a></p>
-          <p class="s">10:00 AM · Mommy and Me</p>
-        </div>
-        <div>
-          <p class="d">Sundays</p>
-          <p class="t"><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3464">Hebrew School of the Arts</a></p>
-          <p class="s">10:30 AM · 3014 Lakeshore Ave</p>
-        </div>
-        <div>
-          <p class="d">Fridays and Saturdays</p>
-          <p class="t"><a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3400">Kabbalat Shabbat &amp; Services</a></p>
-          <p class="s">Shabbat at 3014 Lakeshore Ave</p>
-        </div>
-      </div>
-    </section>
+  <!-- From the Rabbi -->
+  <tr>
+    <td style="padding:44px 40px 12px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; color:#1d1b19;">
+      <p style="margin:0 0 6px; font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#8c1c22;">From the Rabbi <span style="display:inline-block; margin-left:8px; padding:2px 7px; border:1px solid #b89a63; color:#b89a63; font-size:9px; letter-spacing:2px;">Draft for review</span></p>
+      <h2 style="margin:0 0 18px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-weight:500; font-size:32px; line-height:1.15; color:#141414;">Shall Not the Judge of All the Earth Do Justice?</h2>
+      <p style="margin:0 0 16px; font-size:19px; line-height:1.65; color:#2b2724;">This week Abraham does something bold. Hearing that the cities of Sodom are about to be destroyed, he stands before God and argues. Will you sweep away the righteous with the wicked? Perhaps there are fifty righteous people in the city. Will you spare the place for their sake?</p>
+      <p style="margin:0 0 16px; font-size:19px; line-height:1.65; color:#2b2724;">Notice that Abraham is not arguing for his own family. He is arguing for strangers, people he has never met, people who have shown no particular kindness to him. His whole life has been a training in caring for those outside his tent, and now he steps forward for them in the one place where a righteous person is least comfortable: in front of God, pleading.</p>
+      <p style="margin:0 0 16px; font-size:19px; line-height:1.65; color:#2b2724;">Justice, in this portion, is not cold. It is the willingness to plead for people who cannot plead for themselves. Each of us has someone we would rather not speak up for, and each of us is asked, quietly, what we would argue for.</p>
+      <p style="margin:0 0 18px; font-size:19px; line-height:1.65; color:#2b2724;">Shabbat gives us the time to do that. Come sit with us, and bring someone who might be a stranger to you today.</p>
+      <p style="margin:0; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-style:italic; font-size:19px; color:#141414;">Rav Dovid Labkowski</p>
+    </td>
+  </tr>
 
-    <section aria-labelledby="chanukah-title">
-      <div class="feature">
-        <p class="label">Save the date</p>
-        <h2 class="big" id="chanukah-title">Chanukah 2026 in Oakland</h2>
-        <p>Chanukah begins at sundown on Friday, December 4. Join us for the lighting on Lake Merritt, the Car Menorah Parade, and the Piedmont celebration.</p>
-        <a class="btn btn-red" href="https://www.jewishoakland.org/holidays/chanukah/car-menorah-parade/">See the Chanukah schedule</a>
-      </div>
-    </section>
+  <!-- Weekly services -->
+  <tr>
+    <td style="padding:40px 40px 10px; font-family:Montserrat, Helvetica, Arial, sans-serif; color:#1d1b19;">
+      <p style="margin:0 0 6px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#8c1c22;">Weekly services</p>
+      <h2 style="margin:0 0 20px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-weight:500; font-size:30px; color:#141414;">Prayer at the center</h2>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; font-size:14px;">
+        <tr>
+          <td width="34%" valign="top" style="padding:16px 14px 16px 0; border-top:1px solid #b89a63; border-bottom:1px solid #e3dccd; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Monday to Friday</td>
+          <td valign="top" style="padding:16px 0; border-top:1px solid #b89a63; border-bottom:1px solid #e3dccd;">
+            <span style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414;">Shacharis</span> &nbsp;<span style="color:#6b655c;">7:30 AM</span>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="padding:16px 14px 16px 0; border-bottom:1px solid #e3dccd; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Friday</td>
+          <td valign="top" style="padding:16px 0; border-bottom:1px solid #e3dccd;">
+            <span style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414;">Kabbalat Shabbat</span> &nbsp;<span style="color:#6b655c;">6:30 PM, then Kiddush and Shabbat dinner</span>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" style="padding:16px 14px 16px 0; border-bottom:1px solid #e3dccd; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Saturday</td>
+          <td valign="top" style="padding:16px 0; border-bottom:1px solid #e3dccd; line-height:1.9;">
+            <span style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414;">Shacharit</span> &nbsp;<span style="color:#6b655c;">10:00 AM</span><br>
+            <span style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414;">Torah reading</span> &nbsp;<span style="color:#6b655c;">11:00 AM</span><br>
+            <span style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414;">Musaf</span> &nbsp;<span style="color:#6b655c;">12:00 PM</span>, followed by a hot Kiddush luncheon
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
 
-    <section class="joke" aria-labelledby="joke-title">
-      <p class="label" id="joke-title">Joke of the week</p>
-      <p class="q">Moshe goes to the doctor. &ldquo;Doctor, it hurts when I do this.&rdquo;</p>
-      <p class="a"><em>&ldquo;Then don't do that.&rdquo;</em></p>
-    </section>
+  <!-- Calendar -->
+  <tr>
+    <td style="padding:40px 40px 10px; font-family:Montserrat, Helvetica, Arial, sans-serif; color:#1d1b19;">
+      <p style="margin:0 0 6px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#8c1c22;">On the calendar</p>
+      <h2 style="margin:0 0 20px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-weight:500; font-size:30px; color:#141414;">Coming up</h2>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
 
-    <section aria-labelledby="connect-title">
-      <p class="label">Get involved</p>
-      <h2 id="connect-title">Stay connected</h2>
-      <div class="connect">
-        <a href="https://www.jewishoakland.org/main/ask-the-rabbi/">Ask the Rabbi<small>Send us your question</small></a>
-        <a href="https://www.jewishoakland.org/shul/kiddush-sponsorship/">Kiddush Sponsorship<small>Sponsor a Shabbat</small></a>
-        <a href="https://www.jewishoakland.org/main/donate/">Donate<small>Support the center</small></a>
-        <a href="https://wa.me/15105456770">WhatsApp Us<small>510.545.6770</small></a>
-      </div>
-    </section>
+        <tr>
+          <td width="70" valign="top" align="center" style="padding:14px 0; border-top:1px solid #e3dccd; border-right:1px solid #d9c7a3; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Sun</div>
+            <div style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:30px; line-height:1.1; color:#141414;">1</div>
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#8c1c22;">Nov</div>
+          </td>
+          <td valign="top" style="padding:14px 0 14px 18px; border-top:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3464" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:21px; color:#141414; text-decoration:none; border-bottom:1px solid #d9c7a3;">Hebrew School of the Arts</a>
+            <p style="margin:4px 0 0; font-size:13px; color:#6b655c;">10:30 AM &middot; 3014 Lakeshore Ave</p>
+          </td>
+        </tr>
 
-  </main>
+        <tr>
+          <td width="70" valign="top" align="center" style="padding:14px 0; border-top:1px solid #e3dccd; border-right:1px solid #d9c7a3; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Tue</div>
+            <div style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:30px; line-height:1.1; color:#141414;">3</div>
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#8c1c22;">Nov</div>
+          </td>
+          <td valign="top" style="padding:14px 0 14px 18px; border-top:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3419" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:21px; color:#141414; text-decoration:none; border-bottom:1px solid #d9c7a3;">JWC Siddur Soir&eacute;e</a>
+            <p style="margin:4px 0 0; font-size:13px; color:#6b655c;">7:00 PM &middot; Chabad Center for Jewish Life, 3014 Lakeshore Ave</p>
+          </td>
+        </tr>
 
-  <footer>
-    <p class="wordmark-small">Chabad Oakland</p>
-    <p>Chabad Jewish Center of Oakland<br>3014 Lakeshore Ave, Oakland, CA 94610</p>
-    <p>Call or WhatsApp <a href="tel:+15105456770">510.545.6770</a> · <a href="mailto:info@jewishoakland.org">info@jewishoakland.org</a></p>
-    <p><a href="https://www.jewishoakland.org/">Website</a> · <a href="https://www.instagram.com/jewishoakland">Instagram</a> · <a href="https://www.facebook.com/jewishoak/">Facebook</a></p>
-    <p class="fine">You are receiving this letter because you subscribed at jewishoakland.org.<br>To stop receiving it, email <a href="mailto:info@jewishoakland.org?subject=Unsubscribe">info@jewishoakland.org</a>.</p>
-  </footer>
+        <tr>
+          <td width="70" valign="top" align="center" style="padding:14px 0; border-top:1px solid #e3dccd; border-right:1px solid #d9c7a3; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Tue</div>
+            <div style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:30px; line-height:1.1; color:#141414;">3</div>
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#8c1c22;">Nov</div>
+          </td>
+          <td valign="top" style="padding:14px 0 14px 18px; border-top:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3578" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:21px; color:#141414; text-decoration:none; border-bottom:1px solid #d9c7a3;">Caffeine for the Soul</a>
+            <p style="margin:4px 0 0; font-size:13px; color:#6b655c;">11:30 AM &middot; 3014 Lakeshore Ave</p>
+          </td>
+        </tr>
 
-</div>
+        <tr>
+          <td width="70" valign="top" align="center" style="padding:14px 0; border-top:1px solid #e3dccd; border-right:1px solid #d9c7a3; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Wed</div>
+            <div style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:30px; line-height:1.1; color:#141414;">4</div>
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#8c1c22;">Nov</div>
+          </td>
+          <td valign="top" style="padding:14px 0 14px 18px; border-top:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3423" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:21px; color:#141414; text-decoration:none; border-bottom:1px solid #d9c7a3;">Ladies Tanya Class</a>
+            <p style="margin:4px 0 0; font-size:13px; color:#6b655c;">11:30 AM &middot; WhatsApp video</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td width="70" valign="top" align="center" style="padding:14px 0; border-top:1px solid #e3dccd; border-right:1px solid #d9c7a3; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Thu</div>
+            <div style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:30px; line-height:1.1; color:#141414;">5</div>
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#8c1c22;">Nov</div>
+          </td>
+          <td valign="top" style="padding:14px 0 14px 18px; border-top:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3459" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:21px; color:#141414; text-decoration:none; border-bottom:1px solid #d9c7a3;">Challah Babies: Mommy and Me</a>
+            <p style="margin:4px 0 0; font-size:13px; color:#6b655c;">10:00 AM &middot; 3014 Lakeshore Ave</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td width="70" valign="top" align="center" style="padding:14px 0; border-top:1px solid #e3dccd; border-right:1px solid #d9c7a3; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Sun</div>
+            <div style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:30px; line-height:1.1; color:#141414;">22</div>
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#8c1c22;">Nov</div>
+          </td>
+          <td valign="top" style="padding:14px 0 14px 18px; border-top:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3575" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:21px; color:#141414; text-decoration:none; border-bottom:1px solid #d9c7a3;">Latke Wars</a>
+            <p style="margin:4px 0 0; font-size:13px; color:#6b655c;">5:00 PM &middot; 3014 Lakeshore Ave</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td width="70" valign="top" align="center" style="padding:14px 0; border-top:1px solid #e3dccd; border-bottom:1px solid #e3dccd; border-right:1px solid #d9c7a3; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#6b655c;">Fri</div>
+            <div style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:30px; line-height:1.1; color:#141414;">4</div>
+            <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#8c1c22;">Dec</div>
+          </td>
+          <td valign="top" style="padding:14px 0 14px 18px; border-top:1px solid #e3dccd; border-bottom:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif;">
+            <a href="https://www.jewishoakland.org/civicrm/event/info/?reset=1&amp;id=3577" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:21px; color:#141414; text-decoration:none; border-bottom:1px solid #d9c7a3;">Shabbat Unplugged: Chanukah Edition</a>
+            <p style="margin:4px 0 0; font-size:13px; color:#6b655c;">7:00 PM &middot; 3014 Lakeshore Ave</p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+
+  <!-- Chanukah -->
+  <tr>
+    <td style="padding:40px 40px 10px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f6f1e7; border:1px solid #d9c7a3;">
+        <tr>
+          <td align="center" style="padding:34px 30px; font-family:Montserrat, Helvetica, Arial, sans-serif; color:#1d1b19;">
+            <p style="margin:0 0 6px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#8c1c22;">Save the date</p>
+            <h2 style="margin:0 0 12px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-weight:500; font-size:30px; color:#141414;">Chanukah in Oakland</h2>
+            <p style="margin:0 0 20px; font-size:14px; line-height:1.7; color:#6b655c;">Chanukah begins at sundown on Friday, December 4. Join us for the lighting on Lake Merritt, the Car Menorah Parade and the Piedmont celebration.</p>
+            <a href="https://www.jewishoakland.org/holidays/chanukah/car-menorah-parade/" style="display:inline-block; padding:13px 28px; background:#8c1c22; color:#ffffff; font-size:11px; letter-spacing:2.5px; text-transform:uppercase; text-decoration:none;">See the Chanukah schedule</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Joke -->
+  <tr>
+    <td align="center" style="padding:44px 40px 12px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; color:#141414;">
+      <p style="margin:0 0 14px; font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#8c1c22;">Joke of the week</p>
+      <p style="margin:0 auto 12px; max-width:380px; font-size:21px; font-style:italic; line-height:1.5;">Two elderly men are sitting on a bench in Oakland. One says, &ldquo;Have you noticed how small the portions are at restaurants these days?&rdquo;</p>
+      <p style="margin:0; font-size:19px;"><span style="color:#8c1c22;">&ldquo;Yes, and such terrible food. And so little of it.&rdquo;</span></p>
+    </td>
+  </tr>
+
+  <!-- Get involved -->
+  <tr>
+    <td style="padding:36px 40px 12px; font-family:Montserrat, Helvetica, Arial, sans-serif; color:#1d1b19;">
+      <p style="margin:0 0 6px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#8c1c22;">Get involved</p>
+      <h2 style="margin:0 0 18px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-weight:500; font-size:30px; color:#141414;">Stay connected</h2>
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="8" border="0">
+        <tr>
+          <td width="50%" align="center" style="border:1px solid #e3dccd; padding:18px 10px;">
+            <a href="https://www.jewishoakland.org/main/ask-the-rabbi/" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414; text-decoration:none;">Ask the Rabbi</a>
+          </td>
+          <td width="50%" align="center" style="border:1px solid #e3dccd; padding:18px 10px;">
+            <a href="https://www.jewishoakland.org/shul/kiddush-sponsorship/" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414; text-decoration:none;">Sponsor a Kiddush</a>
+          </td>
+        </tr>
+        <tr>
+          <td width="50%" align="center" style="border:1px solid #e3dccd; padding:18px 10px;">
+            <a href="https://www.jewishoakland.org/main/donate/" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414; text-decoration:none;">Donate</a>
+          </td>
+          <td width="50%" align="center" style="border:1px solid #e3dccd; padding:18px 10px;">
+            <a href="https://wa.me/15105456770" style="font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:20px; color:#141414; text-decoration:none;">WhatsApp us</a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td align="center" style="padding:30px 40px 36px; border-top:1px solid #e3dccd; font-family:Montserrat, Helvetica, Arial, sans-serif; font-size:12px; line-height:1.8; color:#6b655c;">
+      <p style="margin:0 0 6px; font-family:'Cormorant Garamond', Garamond, Georgia, serif; font-size:18px; letter-spacing:4px; text-transform:uppercase; color:#141414;">Chabad Oakland</p>
+      <p style="margin:0 0 8px;">Chabad Jewish Center of Oakland &middot; 3014 Lakeshore Ave, Oakland, CA 94610</p>
+      <p style="margin:0 0 8px;"><a href="tel:+15105456770" style="color:#6b655c;">510.545.6770</a> &middot; <a href="mailto:info@jewishoakland.org" style="color:#6b655c;">info@jewishoakland.org</a> &middot; <a href="https://www.jewishoakland.org/" style="color:#6b655c;">jewishoakland.org</a></p>
+      <p style="margin:14px 0 0; font-size:11px;">You are receiving this letter because you subscribed at jewishoakland.org. To stop receiving it, email <a href="mailto:info@jewishoakland.org?subject=Unsubscribe" style="color:#6b655c;">info@jewishoakland.org</a>.</p>
+    </td>
+  </tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
 </body>
 </html>
