@@ -12,6 +12,7 @@ The weekly newsletter for Chabad Jewish Center of Oakland. Each issue is one HTM
 6. Check the weekly services against the schedule page: https://www.jewishoakland.org/shul/schedule-of-services/
 7. Update the calendar with the next few weeks of events, using each event's link from jewishoakland.org.
 8. Change the joke.
+9. Change the photos if you like. They are linked from jewishoakland.org, because email apps can only show pictures that are online. To use a new photo, upload it to the site's media library and paste its address into the `src` of the `<img>`. Give each photo a short `alt` description.
 
 ## Before sending by email
 
