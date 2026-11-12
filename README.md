@@ -25,6 +25,10 @@
 
 Before publishing, replace the placeholder photos with real photos of the hall, and confirm the "Good for" and "How it works" wording with the office. Rates are shown as "Call for a quote" on purpose.
 
+## TV screen
+
+`tv/` is a full-screen page for the 4K TV in the center: slides and videos, upcoming events, Shabbat times and the Kiddush board, all kept up to date from the website. See `tv/README.md`.
+
 ## Putting it on WordPress
 
 The live site runs WordPress with the Unos Premium theme. Two ways to use this design there:

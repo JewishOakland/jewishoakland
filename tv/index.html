@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Chabad Oakland TV</title>
+<link rel="icon" href="https://www.jewishoakland.org/wp-content/uploads/2019/01/cropped-logo-sm-2-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="css/tv.css">
+</head>
+<body>
+<div id="screen">
+
+  <header class="top">
+    <div class="brand">
+      <span class="logo"><img src="https://www.jewishoakland.org/wp-content/uploads/2018/12/cropped-logo-new-1.png" alt=""></span>
+      <div>
+        <b>Chabad Jewish Center of Oakland</b>
+        <span>3014 Lakeshore Ave · jewishoakland.org · (510) 545-6770</span>
+      </div>
+    </div>
+    <div class="now">
+      <div class="clock" id="clock"></div>
+      <div class="dates">
+        <span id="today"></span>
+        <span class="heb" id="hebdate"></span>
+      </div>
+    </div>
+  </header>
+
+  <main class="stage" id="stage" aria-live="off"></main>
+  <div class="progress"><i id="progress"></i></div>
+
+  <section class="band">
+    <div class="card shabbat-card" id="shabbat-card"></div>
+    <div class="card kiddush-card" id="kiddush-card"></div>
+  </section>
+
+  <aside class="events">
+    <h2>Coming up</h2>
+    <div class="event-list" id="event-list"></div>
+    <p class="daily" id="daily"></p>
+  </aside>
+
+  <div class="rest" id="rest" hidden></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/feeds.js"></script>
+<script src="js/tv.js"></script>
+</body>
+</html>
